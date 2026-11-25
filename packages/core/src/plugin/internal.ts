@@ -110,6 +110,7 @@ import { WriteTool } from "../tool/plugin/write.js"
 import { AgentPlugin } from "./agent.js"
 import BrowserPlugin from "@opencode/plugin-browser"
 import { CommandPlugin } from "./command.js"
+import { ContentPlugin } from "./content.js"
 import { IdentityPlugin } from "./identity.js"
 import { ForkNoticePlugin } from "./fork-notice.js"
 import { HomeMemoryPlugin } from "./home-memory.js"
@@ -274,6 +275,7 @@ const pre = [
   HomeMemoryPlugin.Plugin,
   PlanPlugin.Plugin,
   CommandPlugin.Plugin,
+  ContentPlugin.Plugin,
   GoalPlugin.Plugin,
   SkillPlugin.Plugin,
   VcsHgPlugin.Plugin,

@@ -1,0 +1,9 @@
+Repurpose this source into native pieces for other platforms: $ARGUMENTS
+
+Load the repurposing and platforms skills first.
+1. Read the source: a file, a URL (use webfetch), or a transcript. Pull out the core idea, the three to seven strongest points, the best stories, numbers and quotes, and anything contrarian.
+2. Unless the user named the targets, produce the default set: one LinkedIn post, one X thread, one short-video script (30 to 60 seconds), one newsletter section, and one carousel outline. Also list five standalone short posts drawn from single points.
+3. Make each piece native: rewrite for the platform's format, length and audience, with its own hook. Do not just shorten the source.
+4. Save each piece to `drafts/` with the platform in the file name, and link back to the source at the top of each file.
+
+Finish with a table of pieces, file paths and hooks.

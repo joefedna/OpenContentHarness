@@ -1,0 +1,8 @@
+Write opening hooks for this topic or piece: $ARGUMENTS
+
+Load the hooks skill first. Then:
+1. Work out the audience, platform and promise from the request, the brand profile and any referenced file. Ask only if the platform or audience is truly unclear.
+2. Write 10 hooks, each using a different pattern from the skill, labelled with the pattern name. Fit the platform's length and the brand's voice. Use real specifics, not placeholders.
+3. Mark your top three with one line each on why they will stop the scroll for this audience.
+
+Keep it in chat unless the user asks for a file.

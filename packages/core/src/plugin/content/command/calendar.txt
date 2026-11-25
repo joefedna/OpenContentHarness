@@ -1,0 +1,8 @@
+Plan a content calendar: $ARGUMENTS
+
+Use the brand profile for goals, audience and platforms. Ask for the period, cadence and platforms only if they are not given or implied.
+1. Define three to five content pillars tied to the brand's goals and audience problems.
+2. Mix formats and intents across the period: reach (broad hooks, contrarian takes, trends), trust (stories, case studies, how-tos) and conversion (offers, proof, objections). Note the ratio you chose.
+3. For each slot give the date, platform, pillar, format, working title or hook, and which pieces it can be repurposed into.
+4. Mark tent-pole pieces that everything else is cut down from.
+Save as a Markdown table to `plans/` with the period in the file name, and summarize the plan in a few lines.

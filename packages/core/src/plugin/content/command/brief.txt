@@ -1,0 +1,16 @@
+Turn the request below into a content brief and save it to `briefs/` in ${directory}.
+
+Request: $ARGUMENTS
+
+The brief has these sections, each a few lines at most:
+- Goal: the one thing the reader should think, feel or do afterwards, and how success is measured.
+- Audience: who exactly, where they are in their journey, what they already know and believe.
+- Platform and format: where it runs, the format, and the length.
+- Angle: the specific take, and why it is different from what is already out there. If you can, search the web for what currently ranks or performs on the topic and name the gap.
+- Key points: three to five, in order.
+- Proof: facts, numbers, stories or sources to use, with links. Mark anything unverified `[VERIFY: ...]`.
+- Hook options: three, using different hook patterns.
+- CTA: the exact call to action.
+- Constraints: brand rules, banned claims, deadlines.
+
+Fill what you can from the brand profile, the workspace and research. Ask only about gaps that would change the piece. Then show the user the file path, the angle and the hook options, and ask whether to draft.

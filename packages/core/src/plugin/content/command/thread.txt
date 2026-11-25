@@ -1,0 +1,8 @@
+Write an X (Twitter) thread about: $ARGUMENTS
+
+Load the platforms and hooks skills. Rules:
+- Tweet 1 is the hook and must work alone: a clear promise, a bold claim or a specific result, under 280 characters. No "a thread" or emoji bullets unless the brand uses them.
+- Each following tweet makes one point, stands alone if quoted, and ends so the reader wants the next one.
+- 6 to 12 tweets. Use numbers or lists where they help, and line breaks for scannability.
+- The last tweet sums up and gives one call to action (follow, reply, link, repost of tweet 1).
+Number the tweets, keep each under 280 characters, and save to `drafts/` with `.x.md` in the name.

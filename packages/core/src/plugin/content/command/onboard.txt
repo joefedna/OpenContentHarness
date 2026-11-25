@@ -1,0 +1,17 @@
+Set up a brand profile for this workspace so every future piece sounds like the brand. Workspace: ${directory}
+
+What the user gave you: $ARGUMENTS
+
+1. Gather before asking. If the user gave a website, social profiles or sample content, read them with webfetch or the files tools. Look at what already exists in `brands/`, `BRAND.md` and `swipe/`.
+2. Interview for what is still missing, a few questions at a time with the question tool, offering likely answers as options. Cover:
+   - What the brand is, what it sells or offers, and the one outcome it promises.
+   - Who the audience is: role or situation, what they want, what they fear, what they already believe, the words they use.
+   - Voice: three to five adjectives, with a "this, not that" pair for each (for example "direct, not blunt"). Formality, humor, person (I / we / you), sentence length, emoji and slang rules.
+   - Opinions: positions the brand takes that others in its space would disagree with.
+   - Proof: results, numbers, customer stories, credentials the content may cite.
+   - Rules: banned words and phrases, topics to avoid, legal or compliance constraints, spelling (US or UK), formatting habits.
+   - Platforms it publishes on and the goal on each.
+3. Write `brands/<slug>/BRAND.md` (a short kebab-case slug of the brand name) with these sections: Summary, Audience, Voice (with this-not-that pairs and two or three sample sentences in the voice), Opinions, Proof, Rules, Platforms. Keep it tight: it is loaded into every request. If samples of real content were provided, save the best two or three as `brands/<slug>/examples/<name>.md` and describe what makes them work.
+4. If this is the only brand in the workspace it becomes active automatically. Otherwise tell the user to run `/brand <slug>` to switch to it.
+
+Finish with a three-line summary of the voice and a list of what is still unknown.

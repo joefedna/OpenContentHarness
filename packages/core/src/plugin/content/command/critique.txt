@@ -1,0 +1,7 @@
+Critique this draft as a demanding editor: $ARGUMENTS
+
+Read the draft, the brief it was written from if one exists in `briefs/`, and the brand profile. Do not edit the file. Report:
+1. Scores from 1 to 10 with one line of evidence each: hook, clarity of the single idea, specificity and proof, brand voice, platform fit, flow, call to action, and freedom from AI tells.
+2. The three changes that would improve it most, each with a concrete rewrite of the relevant line.
+3. Any claim that is unsupported or risky, quoted, with what is needed to verify it.
+4. A verdict: ship, revise, or rethink, with the reason.

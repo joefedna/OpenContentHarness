@@ -1,0 +1,9 @@
+Write a newsletter issue about: $ARGUMENTS
+
+Load the platforms and frameworks skills. Deliver:
+- Five subject line options (under 50 characters where possible) and matching preview text, using different patterns.
+- An opening that earns the scroll in two or three sentences: a story, a surprising fact or a direct promise. No "Hope you're well".
+- The body: one main idea developed well, with headers or bold leads if it runs long. Concrete examples, one clear takeaway.
+- One primary call to action, placed where the argument peaks, and repeated briefly at the end if the brand does that.
+- A P.S. if it fits the voice.
+Save to `drafts/` with `.newsletter.md` in the name.

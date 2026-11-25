@@ -1,0 +1,7 @@
+Rewrite this so it reads as written by a person in the brand's voice: $ARGUMENTS
+
+Load the de-ai skill first. If the input is a file, edit the file in place after keeping a copy of the original next to it with `.orig` before the extension; otherwise rewrite the pasted text in chat.
+1. Find every tell from the skill's checklist in the text.
+2. Rewrite to remove them while keeping the meaning, the facts and the structure that works. Make it more specific, not just different.
+3. Match the brand voice: vocabulary, rhythm, formality.
+Then list the main changes in a few bullets.

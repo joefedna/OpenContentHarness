@@ -1,0 +1,7 @@
+Write headline or title variants for: $ARGUMENTS
+
+If this is a file, read it first and keep its promise accurate. Load the hooks skill for patterns.
+1. Write 15 variants across different patterns: number, how-to, question, contrarian, curiosity gap, specific outcome, "without" (outcome without the pain), audience call-out, story.
+2. Score each 1 to 5 on clarity, curiosity and specificity, and flag any that overpromise against the content.
+3. Recommend the top three, with an A/B pairing that tests one clear variable.
+For SEO pieces, also give the best title tag (under 60 characters) and meta description (under 155 characters) with the primary keyword near the start.

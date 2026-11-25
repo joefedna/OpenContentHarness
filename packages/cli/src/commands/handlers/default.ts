@@ -10,7 +10,7 @@ import { ServerConnection } from "../../services/server-connection"
 import { Updater } from "../../services/updater"
 import { UpdatePreflight } from "../../services/update-preflight"
 import { Npm } from "@opencode/util/npm"
-import { OPENCODE_ARTIFACT, OPENCODE_CHANNEL, OPENCODE_HIGHLIGHTS, OPENCODE_VERSION } from "../../version"
+import { OPENCONTENT_ARTIFACT, OPENCONTENT_CHANNEL, OPENCONTENT_HIGHLIGHTS, OPENCONTENT_VERSION } from "../../version"
 import { Env } from "../../env"
 import { Service } from "@opencode/client/effect/service"
 import { OpenCode } from "@opencode/client/promise"
@@ -109,10 +109,10 @@ export default Runtime.handler(Commands, (input) =>
     const service = server.service
     yield* run({
       app: {
-        name: process.env.OPENCODE_CLIENT ?? OPENCODE_ARTIFACT,
-        version: OPENCODE_VERSION,
-        channel: process.env.OPENCODE_TUI_CHANNEL ?? OPENCODE_CHANNEL,
-        highlights: OPENCODE_HIGHLIGHTS,
+        name: process.env.OPENCONTENT_CLIENT ?? OPENCONTENT_ARTIFACT,
+        version: OPENCONTENT_VERSION,
+        channel: process.env.OPENCONTENT_TUI_CHANNEL ?? OPENCONTENT_CHANNEL,
+        highlights: OPENCONTENT_HIGHLIGHTS,
       },
       server: {
         endpoint: server.endpoint,

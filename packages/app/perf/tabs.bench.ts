@@ -1,7 +1,7 @@
 // Switching between two open session tabs of 200 long markdown exchanges each (headings, tables, task lists and four
 // highlighted code fences per answer), loaded in full, at 1440×900.
 //
-// Set OPENCODE_PERF_SESSION to a session export (`opencode export <id>`) to add two cases on your own session.
+// Set OPENCONTENT_PERF_SESSION to a session export (`opencode export <id>`) to add two cases on your own session.
 import { readFileSync } from "node:fs"
 import type { SessionMessageInfo } from "@opencode/client/promise"
 import type { Page } from "@playwright/test"
@@ -29,7 +29,7 @@ type SessionExport = {
   messages: SessionMessageInfo[]
 }
 
-const exportFile = process.env.OPENCODE_PERF_SESSION
+const exportFile = process.env.OPENCONTENT_PERF_SESSION
 
 // SAFETY: `opencode export` writes this shape; a file that is not an export fails the first block's load.
 const exported = exportFile ? (JSON.parse(readFileSync(exportFile, "utf8")) as SessionExport) : undefined

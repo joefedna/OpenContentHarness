@@ -52,7 +52,7 @@ const opencode = recordedTests({
   prefix: "opencode-decision",
   provider: "opencode",
   protocol: "system-one",
-  requires: ["OPENCODE_API_KEY"],
+  requires: ["OPENCONTENT_API_KEY"],
   metadata: { model: "jev-1.13-free" },
 })
 
@@ -124,7 +124,7 @@ describe("Decision recorded", () => {
   )
 
   opencode.effect("decides choice score and predicate questions", () =>
-    assertDecision(OpenCode.configure({ apiKey: process.env.OPENCODE_API_KEY ?? "fixture" }).decision("jev-1.13-free")),
+    assertDecision(OpenCode.configure({ apiKey: process.env.OPENCONTENT_API_KEY ?? "fixture" }).decision("jev-1.13-free")),
   )
 
   openrouter.effect("decides choice score and predicate questions", () =>

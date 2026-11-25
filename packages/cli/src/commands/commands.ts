@@ -28,7 +28,7 @@ export const Server = GlobalFlag.Setting("server")({
 
 const ServerFlags = [Standalone, Server] as const
 
-declare const OPENCODE_CLI_NAME: string | undefined
+declare const OPENCONTENT_CLI_NAME: string | undefined
 
 const ServerParams = {
   standalone: Standalone.flag,
@@ -69,7 +69,7 @@ const LoginParams = {
   ),
 }
 
-const Root = Spec.make(typeof OPENCODE_CLI_NAME === "string" ? OPENCODE_CLI_NAME : "opencode", {
+const Root = Spec.make(typeof OPENCONTENT_CLI_NAME === "string" ? OPENCONTENT_CLI_NAME : "opencode", {
   description: "OpenCode command line interface",
   params: {
     ...ServerParams,

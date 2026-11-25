@@ -1997,7 +1997,7 @@ describe("OpencodePlugin", () => {
   )
 
   it.effect("uses a public key and disables paid models without credentials", () =>
-    withEnv({ OPENCODE_API_KEY: undefined }, () =>
+    withEnv({ OPENCONTENT_API_KEY: undefined }, () =>
       Effect.gen(function* () {
         const catalog = yield* Provider.Service
         const models = yield* Model.Service
@@ -2015,7 +2015,7 @@ describe("OpencodePlugin", () => {
   )
 
   it.effect("keeps free models without credentials", () =>
-    withEnv({ OPENCODE_API_KEY: undefined }, () =>
+    withEnv({ OPENCONTENT_API_KEY: undefined }, () =>
       Effect.gen(function* () {
         const catalog = yield* Provider.Service
         const models = yield* Model.Service
@@ -2035,7 +2035,7 @@ describe("OpencodePlugin", () => {
   )
 
   it.effect("treats output-only cost as free without credentials", () =>
-    withEnv({ OPENCODE_API_KEY: undefined }, () =>
+    withEnv({ OPENCONTENT_API_KEY: undefined }, () =>
       Effect.gen(function* () {
         const catalog = yield* Provider.Service
         const models = yield* Model.Service
@@ -2052,8 +2052,8 @@ describe("OpencodePlugin", () => {
     ),
   )
 
-  it.effect("uses OPENCODE_API_KEY as credentials", () =>
-    withEnv({ OPENCODE_API_KEY: "secret" }, () =>
+  it.effect("uses OPENCONTENT_API_KEY as credentials", () =>
+    withEnv({ OPENCONTENT_API_KEY: "secret" }, () =>
       Effect.gen(function* () {
         const catalog = yield* Provider.Service
         const models = yield* Model.Service
@@ -2061,7 +2061,7 @@ describe("OpencodePlugin", () => {
         yield* integrations.transform((editor) =>
           editor.method.update({
             integrationID: Integration.ID.make("opencode"),
-            method: { type: "env", names: ["OPENCODE_API_KEY"] },
+            method: { type: "env", names: ["OPENCONTENT_API_KEY"] },
           }),
         )
         yield* catalog.transform((catalog) => {
@@ -2078,7 +2078,7 @@ describe("OpencodePlugin", () => {
   )
 
   it.effect("uses configured provider env vars as credentials", () =>
-    withEnv({ OPENCODE_API_KEY: undefined, CUSTOM_OPENCODE_API_KEY: "secret" }, () =>
+    withEnv({ OPENCONTENT_API_KEY: undefined, CUSTOM_OPENCONTENT_API_KEY: "secret" }, () =>
       Effect.gen(function* () {
         const catalog = yield* Provider.Service
         const models = yield* Model.Service
@@ -2086,7 +2086,7 @@ describe("OpencodePlugin", () => {
         yield* integrations.transform((editor) => {
           editor.method.update({
             integrationID: Integration.ID.make("opencode"),
-            method: { type: "env", names: ["CUSTOM_OPENCODE_API_KEY"] },
+            method: { type: "env", names: ["CUSTOM_OPENCONTENT_API_KEY"] },
           })
         })
         yield* catalog.transform((catalog) => {
@@ -2105,7 +2105,7 @@ describe("OpencodePlugin", () => {
   )
 
   it.effect("uses configured apiKey as credentials", () =>
-    withEnv({ OPENCODE_API_KEY: undefined }, () =>
+    withEnv({ OPENCONTENT_API_KEY: undefined }, () =>
       Effect.gen(function* () {
         const catalog = yield* Provider.Service
         const models = yield* Model.Service
@@ -2127,7 +2127,7 @@ describe("OpencodePlugin", () => {
   )
 
   it.effect("ignores non-opencode providers and models", () =>
-    withEnv({ OPENCODE_API_KEY: undefined }, () =>
+    withEnv({ OPENCONTENT_API_KEY: undefined }, () =>
       Effect.gen(function* () {
         const catalog = yield* Provider.Service
         const models = yield* Model.Service
@@ -2538,7 +2538,7 @@ for (const key of [undefined, "secret"]) {
   testEffect(Layer.empty).effect(
     `disabled free models with ${key ? "an API key" : "a Console login after startup"}`,
     () =>
-      withEnv({ OPENCODE_DISABLE_FREE_MODELS: "true", OPENCODE_API_KEY: key }, () =>
+      withEnv({ OPENCONTENT_DISABLE_FREE_MODELS: "true", OPENCONTENT_API_KEY: key }, () =>
         Effect.gen(function* () {
           const catalog = yield* Provider.Service
           const models = yield* Model.Service
@@ -2547,7 +2547,7 @@ for (const key of [undefined, "secret"]) {
           yield* integrations.transform((editor) =>
             editor.method.update({
               integrationID: Integration.ID.make("opencode"),
-              method: { type: "env", names: ["OPENCODE_API_KEY"] },
+              method: { type: "env", names: ["OPENCONTENT_API_KEY"] },
             }),
           )
           yield* catalog.transform((editor) => {

@@ -103,7 +103,7 @@ export function formatMachineList(machines: ReadonlyArray<MachineInfo>) {
 
 export function formatMachineError(error: unknown, name?: string) {
   if (isForbiddenError(error)) {
-    return "Machines are experimental and disabled on this server. Turn them on with OPENCODE_FLAGS=machines or experimental.machines: true in your config."
+    return "Machines are experimental and disabled on this server. Turn them on with OPENCONTENT_FLAGS=machines or experimental.machines: true in your config."
   }
   if (isInvalidRequestError(error) && error.kind === "invalid_name") {
     const label = name === undefined ? "That name" : JSON.stringify(name)

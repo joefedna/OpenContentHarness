@@ -343,7 +343,7 @@ function withFallback<T>(read: () => T | undefined, fallback: T) {
 }
 
 /** Only local/dev desktop builds offer the Recent side-tab organization. */
-export function recentSessionsAvailable(platform: "web" | "desktop", channel: ImportMetaEnv["VITE_OPENCODE_CHANNEL"]) {
+export function recentSessionsAvailable(platform: "web" | "desktop", channel: ImportMetaEnv["VITE_OPENCONTENT_CHANNEL"]) {
   return platform === "desktop" && (channel === "local" || channel === "dev")
 }
 
@@ -363,7 +363,7 @@ export const { use: useSettings, provider: SettingsProvider } = createSimpleCont
   init: () => {
     const [store, setStore, , ready] = persisted({ key: "settings.v3" }, settingsPersistence, defaultSettings)
 
-    const prototypes = recentSessionsAvailable(usePlatform().platform, import.meta.env.VITE_OPENCODE_CHANNEL)
+    const prototypes = recentSessionsAvailable(usePlatform().platform, import.meta.env.VITE_OPENCONTENT_CHANNEL)
 
     const sidebarOrganizeOptions: SidebarOrganize[] = prototypes
       ? ["list", "customize", "recent", "consolidated"]
@@ -459,7 +459,7 @@ export const { use: useSettings, provider: SettingsProvider } = createSimpleCont
         },
         tabGroups: withFallback(
           () => store.general?.tabGroups,
-          import.meta.env.DEV && import.meta.env.VITE_OPENCODE_TEST_FIXTURES !== "1",
+          import.meta.env.DEV && import.meta.env.VITE_OPENCONTENT_TEST_FIXTURES !== "1",
         ),
         setTabGroups(value: boolean) {
           setStore("general", "tabGroups", value)

@@ -501,12 +501,12 @@ Formats the Writer must handle natively, each with a template, platform rules an
 
 - [~] **OPS-01** Credential storage for providers and platforms · P0
 - [ ] **OPS-02** OAuth connections for social platforms and CMSs · P0
-- [ ] **OPS-03** Isolated data folders so OpenContent never touches an OpenCode install · P0
+- [x] **OPS-03** Isolated data folders, config, environment variables, service port, command name and desktop IDs, so OpenContentHarness never touches an OpenCode install · P0
 - [ ] **OPS-04** Self-hosting (Docker) for agencies and teams · P1
 - [ ] **OPS-05** Telemetry that's opt-in, and crash reporting · P1
 - [ ] **OPS-06** Evaluations: test suite of briefs with expected quality, run on every prompt or model change · P1
-- [ ] **OPS-07** Auto-update and release channels · P1
-- [ ] **OPS-08** Upstream sync process from OpenCode · P0
+- [ ] **OPS-07** Auto-update and release channels (self-update is switched off until we have our own releases; the desktop update feed still points at OpenCode and must change before packaging) · P1
+- [x] **OPS-08** Independent from upstream: frozen on OpenCode v2.4.1, no syncing · P0
 
 ## 31. Media sourcing (SRC)
 
@@ -585,7 +585,7 @@ End-to-end chains that combine the features above. Each one is a single command 
 
 ## Proposed build order
 
-1. **Foundation:** CORE-07, OPS-03, OPS-08, CORE-06, QA-04, QA-13. A rebranded, isolated harness whose text loop checks itself.
+1. **Foundation:** CORE-07, CORE-06, QA-04, QA-13 (OPS-03 and OPS-08 done). A rebranded, isolated harness whose text loop checks itself.
 2. **First publish:** PUB-01, PUB-06, PUB-12, OPS-02. Content leaves the building.
 3. **Media engine:** MODEL-02, MODEL-11, MODEL-12, MODEL-14, MODEL-07, VGEN-12. One interface to fal.ai, Replicate and direct providers for image, video, 3D, voice and music, with budgets.
 4. **Long video to reels (FLOW-01):** VID-01, VID-28, AUDIO-02, AUDIO-03, VID-09, VID-08, VID-35, VID-10, CAP-01, CAP-02, CAP-04, AUDIO-11, AUDIO-12, AUDIO-15, VID-24, QA-17. The first flagship.

@@ -90,7 +90,7 @@ type PlatformBase = {
   startFileDrag?(path: string): Promise<boolean>
 
   /**
-   * Observe `opencode://` links opened with the app (desktop only). Links that arrived before the first listener
+   * Observe `opencontent://` links opened with the app (desktop only). Links that arrived before the first listener
    * are delivered to it at once.
    */
   onDeepLinks?(listener: (urls: string[]) => void): () => void

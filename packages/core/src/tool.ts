@@ -71,7 +71,7 @@ export interface SnapshotOptions {
    * session's Location and file services.
    */
   readonly services?: Context.Context<CodeModeTool.Services>
-  /** What `opencode://` fetch sends requests through; see the `opencode_api` flag. */
+  /** What `opencontent://` fetch sends requests through; see the `opencode_api` flag. */
   readonly api?: Context.Context<CodeModeTool.Api>
   readonly tools?: Policy
 }

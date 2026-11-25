@@ -17,7 +17,7 @@ import { tmpdir } from "../../core/test/fixture/tmpdir"
 import { it } from "../../core/test/lib/effect"
 import { createRoutes } from "../src/routes"
 
-it.live("sends Code Mode opencode:// requests to the server's own router with the server's credential", () =>
+it.live("sends Code Mode opencontent:// requests to the server's own router with the server's credential", () =>
   Effect.gen(function* () {
     const root = yield* Effect.acquireDisposable(Effect.promise(() => tmpdir("opencode-codemode-api-")))
     const directory = path.join(root.path, "project")
@@ -59,12 +59,12 @@ it.live("sends Code Mode opencode:// requests to the server's own router with th
         api,
       ).execute(
         {
-          code: `const info = await (await fetch("opencode:///api/info")).json()
-            const location = await (await fetch("opencode:///api/location")).json()
-            const child = await (await fetch("opencode:///api/session", {
+          code: `const info = await (await fetch("opencontent:///api/info")).json()
+            const location = await (await fetch("opencontent:///api/location")).json()
+            const child = await (await fetch("opencontent:///api/session", {
               method: "POST",
               headers: { "content-type": "application/json" },
-              body: JSON.stringify({ title: "child", parentID: (await (await fetch("opencode:///api/session/current")).json()).data.id }),
+              body: JSON.stringify({ title: "child", parentID: (await (await fetch("opencontent:///api/session/current")).json()).data.id }),
             })).json()
             return [info.version, location.directory, child.data.title, child.data.parentID]`,
         },

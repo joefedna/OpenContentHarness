@@ -526,7 +526,7 @@ on.effect("runs a shell command on the machine in its working directory", () =>
       expect(result.output).not.toHaveProperty("killed")
       expect(worker.runs[0].argv).toEqual(["sh", "-c", "nvidia-smi"])
       expect(worker.runs[0].cwd).toBe("/work")
-      expect(worker.runs[0].env.OPENCODE_SESSION_ID).toBe(sessionID)
+      expect(worker.runs[0].env.OPENCONTENT_SESSION_ID).toBe(sessionID)
       expect(tools.assertions[0]).toMatchObject({ action: "external_directory", resources: ["gpu:/work/*"] })
     }).pipe(Effect.provide(graph(tools)))
   }),

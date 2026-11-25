@@ -139,7 +139,7 @@ function makeRoutes(
   instances?: InstanceNode,
 ) {
   const auth = ServerAuth.Config.configLayer({ password })
-  // Code Mode `opencode://` fetches go straight to this router, set once the router below is built. They carry the
+  // Code Mode `opencontent://` fetches go straight to this router, set once the router below is built. They carry the
   // server's own credential, added here after the script handed the request over, so the script never sees it.
   const credential = Option.map(password, (value) => `Basic ${Base64.encode(`opencode:${value}`)}`)
   let internal: ((request: Request) => Promise<Response>) | undefined

@@ -52,7 +52,7 @@ const description = (shell?: string, codeMode = false) =>
     "Commands still running after their timeout move to the background.",
     // Code Mode has no background parameter.
     ...(codeMode ? [] : ["Background commands return immediately, and you will be notified when they complete."]),
-    "The current session ID is available in the OPENCODE_SESSION_ID environment variable.",
+    "The current session ID is available in the OPENCONTENT_SESSION_ID environment variable.",
   ].join(" ")
 
 const timeoutInput = (foreground: number) =>
@@ -480,7 +480,7 @@ export const Plugin = {
                         invocation.env.AGENT = "1"
                         invocation.env.OPENCODE = "1"
                         invocation.env.AI_AGENT ||= "opencode"
-                        invocation.env.OPENCODE_SESSION_ID = context.sessionID
+                        invocation.env.OPENCONTENT_SESSION_ID = context.sessionID
                         // Asking for permission can take a while; a stop then ends the call before any command starts.
                         finalTimeout = yield* restore(
                           Effect.raceFirst(prepare(invocation, context, { cwd, target }), stoppedBeforeStart),

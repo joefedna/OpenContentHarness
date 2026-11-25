@@ -86,7 +86,7 @@ export const services = Effect.map(
   Context.pick(Location.Service, FileAccess.Service, FileMutation.Service, FileWrite.Service),
 )
 
-/** What `opencode://` fetch acts through: this process's OpenCode API and the session's Location. */
+/** What `opencontent://` fetch acts through: this process's OpenCode API and the session's Location. */
 export type Api = CodeModeApi.Service | Location.Service
 
 export type Inventory = {
@@ -149,7 +149,7 @@ export const create = (
   permission: Permission.Interface,
   /** With `full_codemode`, the session's services, which turn on the experimental `path` and `Bun` globals. */
   services?: Context.Context<Services>,
-  /** What `opencode://` fetch sends requests through. Without it, `opencode://` fails as unavailable. */
+  /** What `opencontent://` fetch sends requests through. Without it, `opencontent://` fails as unavailable. */
   api?: Context.Context<Api>,
 ) => {
   return {

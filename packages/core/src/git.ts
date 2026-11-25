@@ -907,7 +907,7 @@ const layer = Layer.effect(
         "ls-files",
         "-z",
         "--",
-        literalPathspec(".opencode-probe"),
+        literalPathspec(".opencontent-probe"),
       ]).pipe(Effect.match({ onSuccess: () => false, onFailure: (error) => error.cause === undefined }))
     })
 

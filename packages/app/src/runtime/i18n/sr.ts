@@ -299,7 +299,7 @@ export const dict = {
   "error.chain.responseBody": "Тело одговора:\n{{body}}",
   "error.chain.didYouMean": "Да ли сте мислили: {{suggestions}}",
   "error.chain.modelNotFound": "Модел није пронађен: {{provider}}/{{model}}",
-  "error.chain.checkConfig": "Проверите имена добављача/модела конфигурације (opencode.json).",
+  "error.chain.checkConfig": "Проверите имена добављача/модела конфигурације (opencontent.json).",
   "error.chain.mcpFailed":
     "MCP сервер „{{name}}“ није успео. Напомена, OpenCode још увек не подржава MCP аутентификацију.",
   "error.chain.providerAuthFailed": "аутентификација добављача није успела ({{provider}}): {{message}}",
@@ -780,8 +780,8 @@ export const dict = {
   "project.settings.icon.description": "Препоручено: 128×128пx. Кликните или превуците за отпремање слике.",
   "project.settings.color.description": "Користи се за иконицу пројекта кад није постављена прилагођена слика",
   "project.settings.worktree.startup.description": "Покреће се једном након стварања новог радног стабла",
-  "project.settings.worktree.startup.hint.base": "Користите $OPENCODE_WORKTREE_BASE за основно радно стабло.",
-  "project.settings.worktree.startup.hint.new": "Користите $OPENCODE_WORKTREE_PATH за ново радно стабло.",
+  "project.settings.worktree.startup.hint.base": "Користите $OPENCONTENT_WORKTREE_BASE за основно радно стабло.",
+  "project.settings.worktree.startup.hint.new": "Користите $OPENCONTENT_WORKTREE_PATH за ново радно стабло.",
   "project.settings.extensions.empty.mcps.title": "Још нема MCP-ова",
   "project.settings.extensions.empty.mcps.description": "MCP-ови доступни у OpenCode биће приказани овде",
   "project.settings.extensions.empty.plugins.title": "Још нема додатака",
@@ -1308,7 +1308,7 @@ export const dict = {
   "settings.plugins.part.server": "Сервер",
   "settings.plugins.part.tui": "TUI",
   "settings.plugins.parts.note":
-    'Прекидачи искључују само десктоп интерфејс додатка. Додајте "-<id>" у plugins у глобалном opencode.json да бисте искључили његов серверски део, или "-" и ID његовог TUI додатка у plugins у cli.json да бисте искључили његов TUI део.',
+    'Прекидачи искључују само десктоп интерфејс додатка. Додајте "-<id>" у plugins у глобалном opencontent.json да бисте искључили његов серверски део, или "-" и ID његовог TUI додатка у plugins у cli.json да бисте искључили његов TUI део.',
   "settings.about.copyVersionFailed": "Копирање верзије није успело",
   "settings.about.notices.title": "Обавештења трећих страна",
   "settings.about.notices.description": "OpenCode садржи следећи софтвер отвореног кода.",

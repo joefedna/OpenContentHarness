@@ -210,19 +210,19 @@ describe("Permission", () => {
   test("matches file rules without case where file systems ignore it by default", () => {
     const rules: Permission.Ruleset = [
       { action: "*", resource: "*", effect: "allow" },
-      { action: "edit", resource: ".opencode/*", effect: "ask" },
+      { action: "edit", resource: ".opencontent/*", effect: "ask" },
       { action: "read", resource: "*.env", effect: "deny" },
       { action: "shell", resource: "git push*", effect: "ask" },
     ]
     const files = process.platform === "darwin" || process.platform === "win32"
-    expect(Permission.evaluate("edit", ".OPENCODE/plugins/guard.ts", rules).effect).toBe(files ? "ask" : "allow")
+    expect(Permission.evaluate("edit", ".OPENCONTENT/plugins/guard.ts", rules).effect).toBe(files ? "ask" : "allow")
     expect(Permission.evaluate("read", "Secrets.ENV", rules).effect).toBe(files ? "deny" : "allow")
     // Commands and other resources keep their case outside Windows.
     expect(Permission.evaluate("shell", "GIT PUSH origin dev", rules).effect).toBe(
       process.platform === "win32" ? "ask" : "allow",
     )
-    expect(Wildcard.match(".OPENCODE/x", ".opencode/*", true)).toBe(true)
-    expect(Wildcard.match(".OPENCODE/x", ".opencode/*")).toBe(process.platform === "win32")
+    expect(Wildcard.match(".OPENCONTENT/x", ".opencontent/*", true)).toBe(true)
+    expect(Wildcard.match(".OPENCONTENT/x", ".opencontent/*")).toBe(process.platform === "win32")
   })
 
   for (const action of ["read", "edit", "external_directory"]) {

@@ -311,7 +311,7 @@ export const dict = {
   "error.chain.responseBody": "Тело ответа:\n{{body}}",
   "error.chain.didYouMean": "Возможно, вы имели в виду: {{suggestions}}",
   "error.chain.modelNotFound": "Модель не найдена: {{provider}}/{{model}}",
-  "error.chain.checkConfig": "Проверьте названия провайдера и модели в конфигурации (opencode.json)",
+  "error.chain.checkConfig": "Проверьте названия провайдера и модели в конфигурации (opencontent.json)",
   "error.chain.mcpFailed":
     'MCP-сервер "{{name}}" завершился с ошибкой. Обратите внимание: OpenCode пока не поддерживает MCP-авторизацию.',
   "error.chain.providerAuthFailed": "Ошибка аутентификации провайдера ({{provider}}): {{message}}",
@@ -626,7 +626,7 @@ export const dict = {
   "settings.extensions.tab.mcps": "МКП",
   "settings.extensions.tab.skills": "Навыки",
   "settings.extensions.availableAll": "Доступно для всех проектов",
-  "settings.extensions.manageConfig": "Управление в opencode.json",
+  "settings.extensions.manageConfig": "Управление в opencontent.json",
   "settings.extensions.addSkills": "Как добавить навыки",
   "project.settings.extensions.description": "Посмотреть расширения, доступные для этого проекта",
   "project.settings.extensions.tab.lsps": "ЛСП",
@@ -851,8 +851,8 @@ export const dict = {
     "Рекомендуется: 128×128 пикселей. Нажмите или перетащите для загрузки изображения.",
   "project.settings.color.description": "Используется для иконки проекта, когда не задано пользовательское изображение",
   "project.settings.worktree.startup.description": "Выполняется один раз после создания нового рабочего дерева",
-  "project.settings.worktree.startup.hint.base": "Используйте $OPENCODE_WORKTREE_BASE для базового рабочего дерева.",
-  "project.settings.worktree.startup.hint.new": "Используйте $OPENCODE_WORKTREE_PATH для нового рабочего дерева.",
+  "project.settings.worktree.startup.hint.base": "Используйте $OPENCONTENT_WORKTREE_BASE для базового рабочего дерева.",
+  "project.settings.worktree.startup.hint.new": "Используйте $OPENCONTENT_WORKTREE_PATH для нового рабочего дерева.",
   "project.settings.extensions.empty.mcps.title": "Еще нет MCP",
   "project.settings.extensions.empty.mcps.description": "MCP, доступные для OpenCode, будут отображаться здесь",
   "project.settings.extensions.empty.plugins.title": "Еще нет плагинов",
@@ -1396,7 +1396,7 @@ export const dict = {
   "settings.plugins.part.server": "Сервер",
   "settings.plugins.part.tui": "TUI",
   "settings.plugins.parts.note":
-    'Переключатели отключают только интерфейс плагина в приложении. Чтобы отключить его серверную часть, добавьте "-<id>" в plugins в глобальном opencode.json; чтобы отключить часть TUI, добавьте "-" и ID его TUI-плагина в plugins в cli.json.',
+    'Переключатели отключают только интерфейс плагина в приложении. Чтобы отключить его серверную часть, добавьте "-<id>" в plugins в глобальном opencontent.json; чтобы отключить часть TUI, добавьте "-" и ID его TUI-плагина в plugins в cli.json.',
   "settings.about.copyVersionFailed": "Не удалось скопировать версию",
   "settings.about.notices.title": "Уведомления о стороннем ПО",
   "settings.about.notices.description":

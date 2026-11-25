@@ -287,7 +287,7 @@ export const dict = {
   "error.chain.responseBody": "Trupi i përgjigjes:\n{{body}}",
   "error.chain.didYouMean": "A do të thuash: {{suggestions}}",
   "error.chain.modelNotFound": "Modeli nuk u gjet: {{provider}}/{{model}}",
-  "error.chain.checkConfig": "Kontrolloni emrat e ofruesit/modelit tuaj të konfigurimit (opencode.json).",
+  "error.chain.checkConfig": "Kontrolloni emrat e ofruesit/modelit tuaj të konfigurimit (opencontent.json).",
   "error.chain.mcpFailed": 'Serveri MCP "{{name}}" dështoi. Shënim, OpenCode nuk e mbështet ende vërtetimin MCP.',
   "error.chain.providerAuthFailed": "Autentifikimi i ofruesit dështoi ({{provider}}): {{message}}",
   "error.chain.providerInitFailed":
@@ -590,7 +590,7 @@ export const dict = {
   "settings.extensions.tab.mcps": "MCP-të",
   "settings.extensions.tab.skills": "Aftësitë",
   "settings.extensions.availableAll": "Në dispozicion për të gjitha projektet",
-  "settings.extensions.manageConfig": "Menaxho në opencode.json",
+  "settings.extensions.manageConfig": "Menaxho në opencontent.json",
   "settings.extensions.addSkills": "Si të shtoni aftësi",
   "project.settings.extensions.description": "Shikoni zgjerimet e disponueshme për këtë projekt",
   "project.settings.extensions.tab.lsps": "LSP-të",
@@ -756,8 +756,8 @@ export const dict = {
   "project.settings.color.description":
     "Përdoret për ikonën e projektit kur nuk është vendosur asnjë imazh i personalizuar",
   "project.settings.worktree.startup.description": "Ekzekutohet një herë pas krijimit të një peme të re pune",
-  "project.settings.worktree.startup.hint.base": "Përdorni $OPENCODE_WORKTREE_BASE për pemën bazë të punës.",
-  "project.settings.worktree.startup.hint.new": "Përdorni $OPENCODE_WORKTREE_PATH për pemën e re të punës.",
+  "project.settings.worktree.startup.hint.base": "Përdorni $OPENCONTENT_WORKTREE_BASE për pemën bazë të punës.",
+  "project.settings.worktree.startup.hint.new": "Përdorni $OPENCONTENT_WORKTREE_PATH për pemën e re të punës.",
   "project.settings.extensions.empty.mcps.title": "Nuk ka ende MCPs",
   "project.settings.extensions.empty.mcps.description": "MCPs i disponueshëm për OpenCode do të shfaqet këtu",
   "project.settings.extensions.empty.plugins.title": "Nuk ka ende shtojca",
@@ -1289,7 +1289,7 @@ export const dict = {
   "settings.plugins.part.server": "Serveri",
   "settings.plugins.part.tui": "TUI",
   "settings.plugins.parts.note":
-    'Çelësat çaktivizojnë vetëm ndërfaqen desktop të një shtojce. Shtoni "-<id>" te plugins në opencode.json global për të çaktivizuar pjesën e saj të serverit, ose "-" dhe ID-në e shtojcës TUI te plugins në cli.json për të çaktivizuar pjesën TUI.',
+    'Çelësat çaktivizojnë vetëm ndërfaqen desktop të një shtojce. Shtoni "-<id>" te plugins në opencontent.json global për të çaktivizuar pjesën e saj të serverit, ose "-" dhe ID-në e shtojcës TUI te plugins në cli.json për të çaktivizuar pjesën TUI.',
   "settings.about.copyVersionFailed": "Kopjimi i versionit dështoi",
   "settings.about.notices.title": "Njoftimet e palëve të treta",
   "settings.about.notices.description": "OpenCode përfshin softuerin me burim të hapur të mëposhtëm.",

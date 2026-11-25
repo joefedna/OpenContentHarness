@@ -131,7 +131,7 @@ describe("ContentPlugin.Plugin", () => {
       expect([...result.agents.keys()].sort()).toEqual(["editor", "fact-checker", "researcher", "strategist", "writer"])
       expect(result.agents.get("writer")?.system).toContain("OpenContent")
       expect(result.agents.get("writer")?.system).not.toContain("coding agent")
-      expect(result.agents.get("writer")?.system).not.toContain("${OPENCODE_TOOL_GUIDANCE}")
+      expect(result.agents.get("writer")?.system).not.toContain("${OPENCONTENT_TOOL_GUIDANCE}")
       expect(result.agents.get("researcher")?.mode).toBe("subagent")
       expect(result.skills.map((skill) => skill.id)).toEqual(
         expect.arrayContaining(["hooks", "frameworks", "platforms", "de-ai", "repurposing"]),

@@ -156,7 +156,7 @@ it.live("does not inherit host process.env when creating a shell in a workspace-
     expect(process.env.PATH).toBeDefined()
     expect(capturedEnv).toEqual({
       TERM: "xterm-256color",
-      OPENCODE_TERMINAL: "1",
+      OPENCONTENT_TERMINAL: "1",
     })
   }),
 )

@@ -38,7 +38,7 @@ describe("integrationOptions", () => {
         integration({
           id: "opencode-go",
           name: "OpenCode Go",
-          connections: [{ type: "env", name: "OPENCODE_API_KEY" }],
+          connections: [{ type: "env", name: "OPENCONTENT_API_KEY" }],
         }),
       ]).map((item) => item.id),
     ).toEqual(["opencode"])

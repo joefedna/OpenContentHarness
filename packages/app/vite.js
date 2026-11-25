@@ -83,11 +83,11 @@ const skipComponentsLab = {
 }
 
 export const channel = (() => {
-  const raw = process.env.OPENCODE_CHANNEL
+  const raw = process.env.OPENCONTENT_CHANNEL
 
   if (raw === "local" || raw === "dev" || raw === "beta" || raw === "prod") return raw
 
-  if (process.env.OPENCODE_CHANNEL === "latest") return "prod"
+  if (process.env.OPENCONTENT_CHANNEL === "latest") return "prod"
 
   return "dev"
 })()
@@ -110,7 +110,7 @@ export default [
           },
         },
         define: {
-          "import.meta.env.VITE_OPENCODE_CHANNEL": JSON.stringify(channel),
+          "import.meta.env.VITE_OPENCONTENT_CHANNEL": JSON.stringify(channel),
         },
         worker: {
           format: "es",

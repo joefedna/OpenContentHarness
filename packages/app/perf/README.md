@@ -101,7 +101,7 @@ every OS. Page and desktop cases measure the most on Windows:
   isolated launch cannot move a Cocoa app's `~/Library`, so strobe refuses rather than write into yours.
 - Linux finds windows through X11 (XWayland works; a native Wayland window is invisible to other apps).
 
-Set `OPENCODE_PERF_SESSION` to a session export to add two cases to `tabs.bench.ts` on your own session: open it cold,
+Set `OPENCONTENT_PERF_SESSION` to a session export to add two cases to `tabs.bench.ts` on your own session: open it cold,
 and switch to it warm.
 
 ## Why did it change?
@@ -178,9 +178,9 @@ strobe bench packages/app/perf/timeline.bench.ts --filter "scroll*" --bisect <go
 - `apps` are the desktop profiles. Strobe gives every launch a private home; a profile adds what the desktop needs on
   top: its own database and config, a private service port, a file where the updater keeps its download cache
   (otherwise an older channel downloads the next release mid-run and looks like it idles at 10% CPU), the user's
-  service registration as guarded state (strobe stops if it changes), and the `opencode://` key, which strobe saves
+  service registration as guarded state (strobe stops if it changes), and the `opencontent://` key, which strobe saves
   and restores around each launch. The Dev channel has no profile on purpose. A source build is packed with
-  `OPENCODE_CHANNEL=beta` or `prod` and passed as `exe:<path>`.
+  `OPENCONTENT_CHANNEL=beta` or `prod` and passed as `exe:<path>`.
 
 ## Not benchmarks
 

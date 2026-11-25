@@ -441,7 +441,7 @@ function SkillsItem(props: { tools: SessionMessageAssistantTool[] }) {
     }),
   )
 
-  const marker = "__OPENCODE_LOADED_SKILL__"
+  const marker = "__OPENCONTENT_LOADED_SKILL__"
   const loaded = createMemo(() => i18n.plural("ui.tool.loadedSkills", skills().length, { name: marker }))
 
   return (

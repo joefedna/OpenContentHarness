@@ -27,7 +27,7 @@ const fetch = (input: string | URL, init: Init = {}) =>
     // Rules match the URL, so `https://user@evil.com` would slip past a rule for `https://evil.com/*`.
     if (parsed?.username || parsed?.password)
       return yield* Effect.fail(new TypeError("fetch cannot be used with credentials in the URL."))
-    if (parsed?.protocol === "opencode:") return yield* fetchOpencode(url, init)
+    if (parsed?.protocol === "opencontent:") return yield* fetchOpencode(url, init)
     const execution = yield* CodeModeExecution.Service
     const permission = yield* Permission.Service
     const source = { type: "tool" as const, messageID: execution.messageID, id: execution.id }

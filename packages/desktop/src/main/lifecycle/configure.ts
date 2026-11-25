@@ -8,7 +8,7 @@ import { debugBuild, memoryLogInterval } from "@opencode/gui-plugins/debug/optio
 import { APP_ID, APP_NAME, APP_USER_MODEL_ID, CHANNEL } from "../constants"
 import { debuggingSwitches } from "../diagnostics/options"
 
-const testOnboarding = process.env.OPENCODE_TEST_ONBOARDING === "1"
+const testOnboarding = process.env.OPENCONTENT_TEST_ONBOARDING === "1"
 
 const jsCallStackFeature = "DocumentPolicyIncludeJSCallStacksInCrashReports"
 
@@ -20,7 +20,7 @@ export function configureApplication() {
     process.chdir(homedir())
   } catch {}
 
-  process.env.OPENCODE_DISABLE_EMBEDDED_WEB_UI = "true"
+  process.env.OPENCONTENT_DISABLE_EMBEDDED_WEB_UI = "true"
 
   app.setName(APP_NAME)
   app.setAppUserModelId(APP_USER_MODEL_ID)
@@ -33,7 +33,7 @@ export function configureApplication() {
 
   const build = { packaged: app.isPackaged, channel: CHANNEL }
 
-  const debug = debuggingSwitches(build, process.env.OPENCODE_DESKTOP_REMOTE_DEBUGGING_PORT,
+  const debug = debuggingSwitches(build, process.env.OPENCONTENT_DESKTOP_REMOTE_DEBUGGING_PORT,
     app.commandLine.hasSwitch("remote-debugging-port") ? app.commandLine.getSwitchValue("remote-debugging-port") : undefined,
     app.commandLine.hasSwitch("remote-debugging-pipe"))
 
@@ -47,11 +47,11 @@ export function configureApplication() {
   }
 
   // Precise heap sizes need a launch switch. The debug bar's toggle starts the log without one.
-  if (debugBuild(build) && memoryLogInterval(process.env.OPENCODE_DESKTOP_MEMORY_LOG) !== undefined)
+  if (debugBuild(build) && memoryLogInterval(process.env.OPENCONTENT_DESKTOP_MEMORY_LOG) !== undefined)
     app.commandLine.appendSwitch("enable-precise-memory-info")
 
   const testRoot = createTestRoot()
-  const customUserData = debugBuild(build) && !testRoot ? process.env.OPENCODE_DESKTOP_USER_DATA : undefined
+  const customUserData = debugBuild(build) && !testRoot ? process.env.OPENCONTENT_DESKTOP_USER_DATA : undefined
   app.setPath(
     "userData",
     customUserData ?? (testRoot ? path.join(testRoot, "desktop") : path.join(app.getPath("appData"), APP_ID)),
@@ -81,7 +81,7 @@ export function acquireApplicationLock() {
 function createTestRoot() {
   const root = testOnboarding
     ? path.join(tmpdir(), `opencode-onboarding-${randomUUID()}`)
-    : process.env.OPENCODE_DESKTOP_TEST_ROOT
+    : process.env.OPENCONTENT_DESKTOP_TEST_ROOT
 
   if (!root) return undefined
 
@@ -90,7 +90,7 @@ function createTestRoot() {
   for (const dir of ["data", "config", "cache", "state", "desktop", "session", "documents"])
     mkdirSync(path.join(root, dir), { recursive: true })
 
-  if (testOnboarding) process.env.OPENCODE_DB = ":memory:"
+  if (testOnboarding) process.env.OPENCONTENT_DB = ":memory:"
 
   process.env.XDG_DATA_HOME = path.join(root, "data")
   process.env.XDG_CONFIG_HOME = path.join(root, "config")

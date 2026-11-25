@@ -112,7 +112,7 @@ async function check(channel: string, read: (path: string) => Promise<Uint8Array
   expect(html).toContain(`href="${base}icons/${channel}/favicon.ico"`)
   expect(html).toContain(`href="${base}icons/${channel}/apple-touch-icon.png"`)
   expect(html).toContain(`href="${base}site.webmanifest"`)
-  expect(html).not.toContain("%OPENCODE_")
+  expect(html).not.toContain("%OPENCONTENT_")
 
   await Promise.all(
     Object.entries({

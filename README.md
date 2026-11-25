@@ -54,8 +54,15 @@ bun install
 bun run dev
 ```
 
-> [!WARNING]
-> For now OpenContentHarness shares its data folders with OpenCode. If you also use OpenCode on this machine, wait for the separate data folders (OPS-03 in the plan) before running it.
+OpenContentHarness keeps its own data, config and background service, so it runs safely next to an existing OpenCode install:
+
+| | Location |
+|---|---|
+| Global data, config, cache and state | `opencontent` folders (for example `~/.local/share/opencontent`, `~/.config/opencontent`) |
+| Project config | `.opencontent/` and `opencontent.json` in your workspace |
+| Environment variables | `OPENCONTENT_*` |
+| Background service port | 49351 |
+| Command | `opencontent` |
 
 ## Workspace layout
 

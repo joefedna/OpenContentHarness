@@ -291,7 +291,7 @@ export const dict = {
   "error.chain.responseBody": "ޖަވާބުދާރީވާ ހަށިގަނޑު:\n\u2068{{body}}\u2069 އެވެ",
   "error.chain.didYouMean": "ތިޔަ މާނަކުރީ: \u2068{{suggestions}}\u2069 ހެއްޔެވެ",
   "error.chain.modelNotFound": "މޮޑެލް ނުފެނޭ: \u2068{{provider}}\u2069/\u2068{{model}}\u2069",
-  "error.chain.checkConfig": "ތިބާގެ ކޮންފިގް (opencode.json) ޕްރޮވައިޑަރ/މޮޑެލް ނަންތައް ޗެކްކުރުން",
+  "error.chain.checkConfig": "ތިބާގެ ކޮންފިގް (opencontent.json) ޕްރޮވައިޑަރ/މޮޑެލް ނަންތައް ޗެކްކުރުން",
   "error.chain.mcpFailed":
     'MCP ސަރވަރ "\u2068{{name}}\u2069" ފޭލްވެއްޖެއެވެ. ނޯޓް، OpenCode އިން އަދި MCP އޮތެންޓިކޭޝަން އަށް ސަޕޯޓް ނުކުރެއެވެ.',
   "error.chain.providerAuthFailed":
@@ -577,7 +577,7 @@ export const dict = {
   "settings.extensions.tab.mcps": "MCPs",
   "settings.extensions.tab.skills": "ހުނަރުތައް",
   "settings.extensions.availableAll": "ހުރިހާ ޕްރޮޖެކްޓަކަށް ލިބެންހުރި",
-  "settings.extensions.manageConfig": "opencode.json ގައި މެނޭޖްކުރާށެވެ",
+  "settings.extensions.manageConfig": "opencontent.json ގައި މެނޭޖްކުރާށެވެ",
   "settings.extensions.addSkills": "ހުނަރުތައް އިތުރުކުރާނެ ގޮތް",
   "project.settings.extensions.description": "މި ޕްރޮޖެކްޓަށް ލިބެންހުރި އެކްސްޓެންޝަންތައް ބަލާށެވެ",
   "project.settings.extensions.tab.lsps": "LSPs",
@@ -791,8 +791,8 @@ export const dict = {
     "ލަފާދެނީ: 128×128px. ތަސްވީރެއް އަޕްލޯޑް ކުރުމަށް ކްލިކް ނުވަތަ ޑްރެގް ކުރާށެވެ.",
   "project.settings.color.description": "ކަސްޓަމް އިމޭޖެއް ސެޓް ނުކުރާއިރު ޕްރޮޖެކްޓް އައިކޮންއަށް ބޭނުންކުރެއެވެ",
   "project.settings.worktree.startup.description": "އާ ވޯކްޓްރީއެއް އުފެއްދުމަށްފަހު އެއްފަހަރު ހިނގައެވެ",
-  "project.settings.worktree.startup.hint.base": "ބޭސް ވޯކްޓްރީއަށް $OPENCODE_WORKTREE_BASE ބޭނުން ކުރާށެވެ.",
-  "project.settings.worktree.startup.hint.new": "އާ ވޯކްޓްރީއަށް $OPENCODE_WORKTREE_PATH ބޭނުން ކުރާށެވެ.",
+  "project.settings.worktree.startup.hint.base": "ބޭސް ވޯކްޓްރީއަށް $OPENCONTENT_WORKTREE_BASE ބޭނުން ކުރާށެވެ.",
+  "project.settings.worktree.startup.hint.new": "އާ ވޯކްޓްރީއަށް $OPENCONTENT_WORKTREE_PATH ބޭނުން ކުރާށެވެ.",
   "project.settings.extensions.empty.mcps.title": "އަދި އެމްސީޕީއެއް ނެތެވެ",
   "project.settings.extensions.empty.mcps.description": "OpenCode އަށް ލިބޭ އެމްސީޕީތައް މިތަނުން ފެންނާނެއެވެ",
   "project.settings.extensions.empty.plugins.title": "އަދި ޕްލަގިންސްއެއް ނެތެވެ",
@@ -1324,7 +1324,7 @@ export const dict = {
   "settings.plugins.part.server": "ސަރވަރ",
   "settings.plugins.part.tui": "TUI",
   "settings.plugins.parts.note":
-    'ސްވިޗްތަކުން އޮފް ކުރަނީ ޕްލަގިނެއްގެ ޑެސްކްޓޮޕް UI އެކަންޏެވެ. އޭގެ ސަރވަރ ބައި އޮފް ކުރުމަށް ތިބާގެ ގްލޯބަލް opencode.json ގައި plugins އަށް "-<id>" އިތުރުކުރާށެވެ، ނުވަތަ TUI ބައި އޮފް ކުރުމަށް cli.json ގައި plugins އަށް "-" އާއި އޭގެ TUI ޕްލަގިންގެ ID އިތުރުކުރާށެވެ.',
+    'ސްވިޗްތަކުން އޮފް ކުރަނީ ޕްލަގިނެއްގެ ޑެސްކްޓޮޕް UI އެކަންޏެވެ. އޭގެ ސަރވަރ ބައި އޮފް ކުރުމަށް ތިބާގެ ގްލޯބަލް opencontent.json ގައި plugins އަށް "-<id>" އިތުރުކުރާށެވެ، ނުވަތަ TUI ބައި އޮފް ކުރުމަށް cli.json ގައި plugins އަށް "-" އާއި އޭގެ TUI ޕްލަގިންގެ ID އިތުރުކުރާށެވެ.',
   "settings.about.copyVersionFailed": "ވަރޝަން ކޮޕީ ނުކުރެވުނެވެ",
   "settings.about.notices.title": "ތިންވަނަ ފަރާތުގެ ނޯޓިސްތައް",
   "settings.about.notices.description": "OpenCode ގައި ތިރީގައިވާ އޯޕަން ސޯސް ސޮފްޓްވެއަރ ހިމެނެއެވެ.",

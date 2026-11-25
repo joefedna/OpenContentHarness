@@ -15,7 +15,7 @@ test("each task starts the app with a flag that a second instance reads back as 
     ["New Session", "new-session"],
     ["New Window", "new-window"],
   ])
-  expect(jumpTask([program, "opencode://open-project?directory=C:\\repo"])).toBeUndefined()
+  expect(jumpTask([program, "opencontent://open-project?directory=C:\\repo"])).toBeUndefined()
 })
 
 test("task titles follow the app language", () => {

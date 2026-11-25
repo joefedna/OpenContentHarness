@@ -37,7 +37,7 @@ test("hides OpenCode Go until a Go key is saved", () => {
   expect(
     loginChoices([
       integration({ id: "opencode", name: "OpenCode Console" }),
-      integration({ id: "opencode-go", name: "OpenCode Go", connections: [{ type: "env", name: "OPENCODE_API_KEY" }] }),
+      integration({ id: "opencode-go", name: "OpenCode Go", connections: [{ type: "env", name: "OPENCONTENT_API_KEY" }] }),
     ]).map((choice) => choice.value),
   ).toEqual(["opencode"])
 })

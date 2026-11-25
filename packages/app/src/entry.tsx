@@ -50,7 +50,7 @@ const clearAuthToken = () => {
 }
 
 // package.json carries the last stable version on every channel, so the server's build passes its own release.
-const web = createWebPlatform(import.meta.env.VITE_OPENCODE_VERSION ?? pkg.version)
+const web = createWebPlatform(import.meta.env.VITE_OPENCONTENT_VERSION ?? pkg.version)
 
 if (import.meta.env.PROD && "serviceWorker" in navigator) {
   window.addEventListener("load", () => void navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`), {
@@ -71,7 +71,7 @@ if (import.meta.env.VITE_SENTRY_DSN) {
     integrations: (integrations) => {
       return integrations.filter(
         (i) =>
-          i.name !== "Breadcrumbs" && !(import.meta.env.OPENCODE_CHANNEL === "prod" && i.name === "GlobalHandlers"),
+          i.name !== "Breadcrumbs" && !(import.meta.env.OPENCONTENT_CHANNEL === "prod" && i.name === "GlobalHandlers"),
       )
     },
   })

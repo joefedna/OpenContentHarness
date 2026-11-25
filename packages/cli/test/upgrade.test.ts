@@ -2,8 +2,10 @@ import { describe, expect, test } from "bun:test"
 import { mkdtemp, rm } from "node:fs/promises"
 import os from "node:os"
 import path from "node:path"
+import { Updater } from "../src/services/updater"
 
-describe("upgrade command", () => {
+// Self-update is off until OpenContentHarness has its own release channel; see Updater.releases.
+describe.skipIf(!Updater.releases)("upgrade command", () => {
   test("is registered in root help and documents its options", async () => {
     const root = await cli(["--help"], {}, "../src/index.ts")
     const help = await cli(["upgrade", "--help"], {}, "../src/index.ts")
@@ -87,17 +89,17 @@ async function cli(args: string[], env: Record<string, string> = {}, entry = "fi
   const root = await mkdtemp(path.join(os.tmpdir(), "opencode-upgrade-"))
   try {
     const child = Bun.spawn(
-      [process.execPath, "--define", 'OPENCODE_VERSION="0.0.0-beta-old"', path.join(import.meta.dir, entry), ...args],
+      [process.execPath, "--define", 'OPENCONTENT_VERSION="0.0.0-beta-old"', path.join(import.meta.dir, entry), ...args],
       {
         cwd: path.join(import.meta.dir, ".."),
         env: {
           ...process.env,
-          OPENCODE_TEST_HOME: root,
+          OPENCONTENT_TEST_HOME: root,
           XDG_DATA_HOME: path.join(root, "data"),
           XDG_CONFIG_HOME: path.join(root, "config"),
           XDG_CACHE_HOME: path.join(root, "cache"),
           XDG_STATE_HOME: path.join(root, "state"),
-          OPENCODE_DISABLE_AUTOUPDATE: "1",
+          OPENCONTENT_DISABLE_AUTOUPDATE: "1",
           ...env,
         },
         stdout: "pipe",
@@ -113,9 +115,19 @@ async function cli(args: string[], env: Record<string, string> = {}, entry = "fi
       .split("\n")
       .filter((line) => line.startsWith("EVENT "))
       .map((line) => JSON.parse(line.slice(6)))
-    expect(await Bun.file(path.join(root, "state", "opencode", "service-local.json")).exists()).toBe(false)
+    expect(await Bun.file(path.join(root, "state", "opencontent", "service-local.json")).exists()).toBe(false)
     return { stdout, stderr, exitCode, events }
   } finally {
     await rm(root, { recursive: true, force: true })
   }
 }
+
+test("upgrade explains that self-update is unavailable without a release channel", async () => {
+  if (Updater.releases) return
+  const result = Bun.spawnSync([process.execPath, path.join(import.meta.dir, "..", "src", "index.ts"), "upgrade"], {
+    cwd: path.join(import.meta.dir, ".."),
+    env: { ...process.env, OPENCONTENT_DISABLE_AUTOUPDATE: "1" },
+  })
+  expect(result.exitCode).not.toBe(0)
+  expect(result.stdout.toString() + result.stderr.toString()).toContain("Self-update isn't available yet")
+})

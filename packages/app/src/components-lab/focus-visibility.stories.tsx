@@ -899,7 +899,7 @@ const surfaces: Surface[] = [
               <Tabs.Content value="mcps">
                 <div class="settings-extension-row">
                   <span>Available to all projects</span>
-                  <span class="text-v2-text-text-muted">Manage in opencode.json</span>
+                  <span class="text-v2-text-text-muted">Manage in opencontent.json</span>
                 </div>
               </Tabs.Content>
               <Tabs.Content value="plugins">Manage plugins</Tabs.Content>

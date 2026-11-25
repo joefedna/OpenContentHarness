@@ -71,7 +71,7 @@ export async function createAcpFixture(
       })
     },
   })
-  await Bun.write(path.join(config, "opencode.json"), JSON.stringify(verifierConfig(`http://127.0.0.1:${llm.port}/v1`)))
+  await Bun.write(path.join(config, "opencontent.json"), JSON.stringify(verifierConfig(`http://127.0.0.1:${llm.port}/v1`)))
   await Bun.write(models, "{}")
 
   const processes = new Set<AcpProcess>()
@@ -83,12 +83,12 @@ export async function createAcpFixture(
       const acp = spawnAcp({
         env: isolatedEnv(root, {
           USERPROFILE: root,
-          OPENCODE_CONFIG: undefined,
-          OPENCODE_CONFIG_CONTENT: undefined,
-          OPENCODE_DISABLE_AUTOUPDATE: "true",
-          OPENCODE_MODELS_PATH: models,
+          OPENCONTENT_CONFIG: undefined,
+          OPENCONTENT_CONFIG_CONTENT: undefined,
+          OPENCONTENT_DISABLE_AUTOUPDATE: "true",
+          OPENCONTENT_MODELS_PATH: models,
           // The scripted model calls read and shell directly, which full_codemode moves inside execute.
-          OPENCODE_FLAGS: "-full_codemode",
+          OPENCONTENT_FLAGS: "-full_codemode",
         }),
       })
       processes.add(acp)
@@ -207,8 +207,8 @@ function verifierConfig(llmUrl: string) {
 }
 
 function spawnAcp(input: { readonly env: Record<string, string | undefined> }): AcpProcess {
-  // OPENCODE_ACP_TEST_BIN runs the suites against another ACP binary, such as the Rust client.
-  const override = process.env.OPENCODE_ACP_TEST_BIN
+  // OPENCONTENT_ACP_TEST_BIN runs the suites against another ACP binary, such as the Rust client.
+  const override = process.env.OPENCONTENT_ACP_TEST_BIN
   const child = Bun.spawn(override ? [override, "acp"] : [process.execPath, "run", "src/index.ts", "acp"], {
     cwd: path.join(import.meta.dir, "../.."),
     env: input.env,

@@ -295,7 +295,7 @@ export const dict = {
   "error.chain.responseBody": "جواب دا متن:\n\u2068{{body}}\u2069",
   "error.chain.didYouMean": "کی تہاڈا مطلب سی: \u2068{{suggestions}}\u2069",
   "error.chain.modelNotFound": "ماڈل نئیں لبیا: \u2068{{provider}}\u2069/\u2068{{model}}\u2069",
-  "error.chain.checkConfig": "اپنی کنفگ (opencode.json) وچ پرووائیڈر/ماڈل دے ناں چیک کرو",
+  "error.chain.checkConfig": "اپنی کنفگ (opencontent.json) وچ پرووائیڈر/ماڈل دے ناں چیک کرو",
   "error.chain.mcpFailed":
     'MCP سرور "\u2068{{name}}\u2069" ناکام ہو گیا۔ نوٹ، OpenCode ہلے تک MCP تصدیق دی حمایت نئیں کردا۔',
   "error.chain.providerAuthFailed":
@@ -572,7 +572,7 @@ export const dict = {
   "settings.extensions.tab.mcps": "MCPs",
   "settings.extensions.tab.skills": "مہارتاں",
   "settings.extensions.availableAll": "سارے پروجیکٹاں لئی دستیاب",
-  "settings.extensions.manageConfig": "opencode.json چ سنبھالو",
+  "settings.extensions.manageConfig": "opencontent.json چ سنبھالو",
   "settings.extensions.addSkills": "مہارتاں شامل کرن دا طریقہ",
   "project.settings.extensions.description": "اس پروجیکٹ لئی دستیاب ایکسٹینشن ویکھو",
   "project.settings.extensions.tab.lsps": "LSPs",
@@ -781,8 +781,8 @@ export const dict = {
   "project.settings.icon.description": "تجویز کردہ: 128×128px۔ تصویر اپ لوڈ کرنے لئی کلک کرو یا گھسیٹیں۔",
   "project.settings.color.description": "پروجیکٹ آئیکن لئی استعمال کیا جاتا ہے جب کوئی حسب ضرورت تصویر سیٹ نہ ہو۔",
   "project.settings.worktree.startup.description": "نیا ورک ٹری بنانے دے بعد ایک بار چلتا اے۔",
-  "project.settings.worktree.startup.hint.base": "بیس ورک ٹری لئی $OPENCODE_WORKTREE_BASE استعمال کرو۔",
-  "project.settings.worktree.startup.hint.new": "نئے ورک ٹری لئی $OPENCODE_WORKTREE_PATH استعمال کرو۔",
+  "project.settings.worktree.startup.hint.base": "بیس ورک ٹری لئی $OPENCONTENT_WORKTREE_BASE استعمال کرو۔",
+  "project.settings.worktree.startup.hint.new": "نئے ورک ٹری لئی $OPENCONTENT_WORKTREE_PATH استعمال کرو۔",
   "project.settings.extensions.empty.mcps.title": "ابھی تک کوئی MCPs نئیں نیں۔",
   "project.settings.extensions.empty.mcps.description": "OpenCode کو دستیاب MCPs یہاں ظاہر ہوں گے۔",
   "project.settings.extensions.empty.plugins.title": "ابھی تک کوئی پلگ ان نئیں اے۔",
@@ -1291,7 +1291,7 @@ export const dict = {
   "settings.plugins.part.server": "سرور",
   "settings.plugins.part.tui": "TUI",
   "settings.plugins.parts.note":
-    'سوئچ صرف پلگ ان دا ڈیسک ٹاپ UI بند کردے نیں۔ ایہدا سرور حصہ بند کرن لئی اپنی گلوبل opencode.json وچ plugins وچ "-<id>" شامل کرو، یا ایہدا TUI حصہ بند کرن لئی cli.json وچ plugins وچ "-" تے ایہدے TUI پلگ ان دی ID شامل کرو۔',
+    'سوئچ صرف پلگ ان دا ڈیسک ٹاپ UI بند کردے نیں۔ ایہدا سرور حصہ بند کرن لئی اپنی گلوبل opencontent.json وچ plugins وچ "-<id>" شامل کرو، یا ایہدا TUI حصہ بند کرن لئی cli.json وچ plugins وچ "-" تے ایہدے TUI پلگ ان دی ID شامل کرو۔',
   "settings.about.copyVersionFailed": "ورژن کاپی نئیں ہو سکیا",
   "settings.about.notices.title": "تیجے فریق دے نوٹس",
   "settings.about.notices.description": "OpenCode وچ ایہہ اوپن سورس سافٹ ویئر شامل اے۔",

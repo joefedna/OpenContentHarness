@@ -39,10 +39,10 @@ export default Runtime.handler(
 
 export async function resolveConfigPath(directory: string) {
   const candidates = [
-    path.join(directory, "opencode.json"),
-    path.join(directory, "opencode.jsonc"),
-    path.join(directory, ".opencode", "opencode.json"),
-    path.join(directory, ".opencode", "opencode.jsonc"),
+    path.join(directory, "opencontent.json"),
+    path.join(directory, "opencontent.jsonc"),
+    path.join(directory, ".opencontent", "opencontent.json"),
+    path.join(directory, ".opencontent", "opencontent.jsonc"),
   ]
   for (const candidate of candidates) {
     if (

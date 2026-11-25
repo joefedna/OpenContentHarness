@@ -285,7 +285,7 @@ export const dict = {
   "error.chain.responseBody": "Răspuns:\n{{body}}",
   "error.chain.didYouMean": "Ai vrut să scrii: {{suggestions}}",
   "error.chain.modelNotFound": "Modelul nu a fost găsit: {{provider}}/{{model}}",
-  "error.chain.checkConfig": "Verifică numele provider/model în config (opencode.json)",
+  "error.chain.checkConfig": "Verifică numele provider/model în config (opencontent.json)",
   "error.chain.mcpFailed": 'Serverul MCP "{{name}}" a eșuat. Atenție, OpenCode nu suportă încă autentificarea MCP.',
   "error.chain.providerAuthFailed": "Autentificarea providerului a eșuat ({{provider}}): {{message}}",
   "error.chain.providerInitFailed":
@@ -594,7 +594,7 @@ export const dict = {
   "settings.extensions.tab.mcps": "MCP-uri",
   "settings.extensions.tab.skills": "Abilități",
   "settings.extensions.availableAll": "Disponibil pentru toate proiectele",
-  "settings.extensions.manageConfig": "Gestionează în opencode.json",
+  "settings.extensions.manageConfig": "Gestionează în opencontent.json",
   "settings.extensions.addSkills": "Cum se adaugă abilități",
   "project.settings.extensions.description": "Vezi extensiile disponibile pentru acest proiect",
   "project.settings.extensions.tab.lsps": "LSP-uri",
@@ -764,8 +764,8 @@ export const dict = {
   "project.settings.color.description":
     "Folosit pentru pictograma proiectului când nu este setată nicio imagine personalizată",
   "project.settings.worktree.startup.description": "Rulează o dată după crearea unui nou arbore de lucru",
-  "project.settings.worktree.startup.hint.base": "Utilizați $OPENCODE_WORKTREE_BASE pentru arborele de lucru de bază.",
-  "project.settings.worktree.startup.hint.new": "Utilizați $OPENCODE_WORKTREE_PATH pentru noul arbore de lucru.",
+  "project.settings.worktree.startup.hint.base": "Utilizați $OPENCONTENT_WORKTREE_BASE pentru arborele de lucru de bază.",
+  "project.settings.worktree.startup.hint.new": "Utilizați $OPENCONTENT_WORKTREE_PATH pentru noul arbore de lucru.",
   "project.settings.extensions.empty.mcps.title": "Nu MCPs încă",
   "project.settings.extensions.empty.mcps.description": "MCPs disponibil pentru OpenCode va apărea aici",
   "project.settings.extensions.empty.plugins.title": "Nu există încă pluginuri",
@@ -1315,7 +1315,7 @@ export const dict = {
   "settings.plugins.part.server": "Server",
   "settings.plugins.part.tui": "TUI",
   "settings.plugins.parts.note":
-    'Comutatoarele dezactivează doar interfața desktop a unui plugin. Adaugă "-<id>" la plugins în opencode.json global pentru a-i dezactiva partea de server, sau "-" urmat de ID-ul pluginului TUI la plugins în cli.json pentru a-i dezactiva partea TUI.',
+    'Comutatoarele dezactivează doar interfața desktop a unui plugin. Adaugă "-<id>" la plugins în opencontent.json global pentru a-i dezactiva partea de server, sau "-" urmat de ID-ul pluginului TUI la plugins în cli.json pentru a-i dezactiva partea TUI.',
   "settings.about.copyVersionFailed": "Nu s-a putut copia versiunea",
   "settings.about.notices.title": "Notificări privind terțe părți",
   "settings.about.notices.description": "OpenCode include următorul software open source.",

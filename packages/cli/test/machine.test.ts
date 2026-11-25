@@ -145,7 +145,7 @@ describe("machine output formatting", () => {
   })
 
   test("formats actionable error messages", () => {
-    expect(formatMachineError({ _tag: "ForbiddenError", message: "disabled" })).toContain("OPENCODE_FLAGS=machines")
+    expect(formatMachineError({ _tag: "ForbiddenError", message: "disabled" })).toContain("OPENCONTENT_FLAGS=machines")
     expect(formatMachineError({ _tag: "ForbiddenError", message: "disabled" })).toContain("experimental.machines: true")
     expect(formatMachineError({ _tag: "InvalidRequestError", kind: "invalid_name", message: "bad" }, "Bad")).toContain(
       "2 to 63",

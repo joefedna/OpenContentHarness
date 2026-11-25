@@ -62,15 +62,15 @@ export default bench({
     install: app("opencode", { gpuCache: "cold" }),
     // A contributor's `bun dev:desktop` in each variant's checkout, isolated under the launch's home.
     dev: command("bun dev:desktop", {
-      unset: ["OPENCODE_*", "OTEL_*", "SENTRY_*"],
+      unset: ["OPENCONTENT_*", "OTEL_*", "SENTRY_*"],
       env: {
-        OPENCODE_CONFIG_DIR: "{home}/config",
-        OPENCODE_DB: "{home}/data/opencode.db",
-        OPENCODE_TEST_HOME: "{home}/home",
-        OPENCODE_TEST_ONBOARDING: "0",
-        OPENCODE_DESKTOP_TEST_ROOT: "{home}",
-        OPENCODE_DESKTOP_REMOTE_DEBUGGING_PORT: "0",
-        OPENCODE_DESKTOP_DISABLE_PROTOCOL_REGISTRATION: "1",
+        OPENCONTENT_CONFIG_DIR: "{home}/config",
+        OPENCONTENT_DB: "{home}/data/opencode.db",
+        OPENCONTENT_TEST_HOME: "{home}/home",
+        OPENCONTENT_TEST_ONBOARDING: "0",
+        OPENCONTENT_DESKTOP_TEST_ROOT: "{home}",
+        OPENCONTENT_DESKTOP_REMOTE_DEBUGGING_PORT: "0",
+        OPENCONTENT_DESKTOP_DISABLE_PROTOCOL_REGISTRATION: "1",
         // The test root moves XDG_CACHE_HOME, which would make every start transpile the source CLI
         // from scratch; a contributor's dev start reuses Bun's own cache.
         BUN_RUNTIME_TRANSPILER_CACHE_PATH: process.env.BUN_RUNTIME_TRANSPILER_CACHE_PATH ?? bunTranspilerCache(),
@@ -153,10 +153,10 @@ function skipOnboarding(ctx: LaunchContext<unknown>) {
   const name = basename(ctx.exe!, ".exe")
 
   const id = /beta/i.test(name)
-    ? "ai.opencode.desktop.beta"
+    ? "ai.opencontent.desktop.beta"
     : /dev/i.test(name)
-      ? "ai.opencode.desktop.dev"
-      : "ai.opencode.desktop"
+      ? "ai.opencontent.desktop.dev"
+      : "ai.opencontent.desktop"
 
   const file = join(ctx.home!, "AppData", "Roaming", id, "opencode.settings")
   const settings = existsSync(file) ? JSON.parse(readFileSync(file, "utf8")) : {}
@@ -172,7 +172,7 @@ function skipOnboarding(ctx: LaunchContext<unknown>) {
 const services = new Map<string, number>()
 
 async function warmService(ctx: LaunchContext<unknown>) {
-  const registration = join(ctx.home!, ".local", "state", "opencode", "service.json")
+  const registration = join(ctx.home!, ".local", "state", "opencontent", "service.json")
 
   if (await answers(registration)) return
 

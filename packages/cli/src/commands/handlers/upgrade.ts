@@ -4,7 +4,7 @@ import { Commands } from "../commands"
 import { Runtime } from "../../framework/runtime"
 import { Updater } from "../../services/updater"
 import { handlePromptErrors } from "../../ui/prompt"
-import { OPENCODE_VERSION } from "../../version"
+import { OPENCONTENT_VERSION } from "../../version"
 import { stripVTControlCharacters } from "node:util"
 
 export default Runtime.handler(
@@ -12,6 +12,12 @@ export default Runtime.handler(
   Effect.fn("cli.upgrade")(
     function* (input) {
       intro("Upgrade")
+      if (!Updater.releases)
+        return yield* Effect.fail(
+          new Error(
+            "Self-update isn't available yet: OpenContentHarness has no release channel. To update, pull the latest source and run `bun install`.",
+          ),
+        )
       const updater = yield* Updater.Service
       const method = Option.getOrUndefined(input.method) ?? (yield* updater.method())
       if (!method)
@@ -23,13 +29,13 @@ export default Runtime.handler(
       log.info(`Using method: ${method}`)
       const target = Option.getOrUndefined(input.target) ?? (yield* updater.latest(method))
       const version = target.trim().replace(/^v/, "")
-      if (version === OPENCODE_VERSION) {
+      if (version === OPENCONTENT_VERSION) {
         log.warn(`OpenCode upgrade skipped: ${version} is already installed`)
         outro("Done")
         return
       }
 
-      log.info(`From ${OPENCODE_VERSION} → ${version}`)
+      log.info(`From ${OPENCONTENT_VERSION} → ${version}`)
       const progress = spinner()
       progress.start("Upgrading...")
       yield* updater.upgrade(method, target).pipe(

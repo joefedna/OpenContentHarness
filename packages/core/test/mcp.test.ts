@@ -376,7 +376,7 @@ function resourceMcpLayer(
     name?: string
     credentials?: Partial<Credential.Interface>
     bus?: Layer.Layer<Bus.Service>
-    /** `OPENCODE_FLAGS`, such as `-machines`. */
+    /** `OPENCONTENT_FLAGS`, such as `-machines`. */
     flags?: string
   },
 ) {

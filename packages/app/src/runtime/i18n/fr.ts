@@ -68,8 +68,8 @@ export const dict = {
   "project.settings.color.description":
     "Utilisé pour l'icône du projet lorsqu'aucune image personnalisée n'est définie",
   "project.settings.worktree.startup.description": "S'exécute une fois après la création d'un nouvel espace de travail",
-  "project.settings.worktree.startup.hint.base": "Utilisez $OPENCODE_WORKTREE_BASE pour l'espace de travail de base.",
-  "project.settings.worktree.startup.hint.new": "Utilisez $OPENCODE_WORKTREE_PATH pour le nouvel espace de travail.",
+  "project.settings.worktree.startup.hint.base": "Utilisez $OPENCONTENT_WORKTREE_BASE pour l'espace de travail de base.",
+  "project.settings.worktree.startup.hint.new": "Utilisez $OPENCONTENT_WORKTREE_PATH pour le nouvel espace de travail.",
   "project.settings.extensions.empty.mcps.title": "Pas encore de MCPs",
   "project.settings.extensions.empty.mcps.description": "MCPs disponible pour OpenCode apparaîtra ici",
   "project.settings.extensions.empty.plugins.title": "Pas encore de plugin",
@@ -502,7 +502,7 @@ export const dict = {
   "error.chain.responseBody": "Corps de la réponse :\n{{body}}",
   "error.chain.didYouMean": "Vouliez-vous dire : {{suggestions}}",
   "error.chain.modelNotFound": "Modèle introuvable : {{provider}}/{{model}}",
-  "error.chain.checkConfig": "Vérifiez les noms de fournisseur et de modèle dans votre configuration (opencode.json)",
+  "error.chain.checkConfig": "Vérifiez les noms de fournisseur et de modèle dans votre configuration (opencontent.json)",
   "error.chain.mcpFailed":
     "Le serveur MCP \"{{name}}\" a échoué. Notez qu'OpenCode ne prend pas encore en charge l'authentification MCP.",
   "error.chain.providerAuthFailed": "Échec de l'authentification du fournisseur ({{provider}}) : {{message}}",
@@ -795,7 +795,7 @@ export const dict = {
   "settings.extensions.tab.mcps": "MCP",
   "settings.extensions.tab.skills": "Compétences",
   "settings.extensions.availableAll": "Disponible pour tous les projets",
-  "settings.extensions.manageConfig": "Gérer dans opencode.json",
+  "settings.extensions.manageConfig": "Gérer dans opencontent.json",
   "settings.extensions.addSkills": "Comment ajouter des compétences",
   "project.settings.extensions.description": "Afficher les extensions disponibles pour ce projet",
   "project.settings.extensions.tab.lsps": "LSP",
@@ -1342,7 +1342,7 @@ export const dict = {
   "settings.plugins.part.server": "Serveur",
   "settings.plugins.part.tui": "TUI",
   "settings.plugins.parts.note":
-    'Les interrupteurs désactivent uniquement l’interface de bureau d’un plugin. Ajoutez "-<id>" à plugins dans votre opencode.json global pour désactiver sa partie serveur, ou "-" suivi de l’ID de son plugin TUI à plugins dans cli.json pour désactiver sa partie TUI.',
+    'Les interrupteurs désactivent uniquement l’interface de bureau d’un plugin. Ajoutez "-<id>" à plugins dans votre opencontent.json global pour désactiver sa partie serveur, ou "-" suivi de l’ID de son plugin TUI à plugins dans cli.json pour désactiver sa partie TUI.',
   "settings.about.copyVersionFailed": "Échec de la copie de la version",
   "settings.about.notices.title": "Mentions tierces",
   "settings.about.notices.description": "OpenCode inclut les logiciels open source suivants.",

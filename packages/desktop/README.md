@@ -23,9 +23,9 @@ Both read the same environment as every other release package:
 
 | Variable           | Meaning                                                                                                         |
 | ------------------ | --------------------------------------------------------------------------------------------------------------- |
-| `OPENCODE_CHANNEL` | `dev` (default), `beta`, or `latest`/`prod`. Picks the app identity, icons and bundled CLI.                     |
-| `OPENCODE_VERSION` | Version stamped into the app and its packages.                                                                  |
-| `OPENCODE_TARGET`  | `darwin-arm64`, `darwin-x64`, `windows-arm64`, `windows-x64`, `linux-x64`, `linux-arm64`. Defaults to the host. |
+| `OPENCONTENT_CHANNEL` | `dev` (default), `beta`, or `latest`/`prod`. Picks the app identity, icons and bundled CLI.                     |
+| `OPENCONTENT_VERSION` | Version stamped into the app and its packages.                                                                  |
+| `OPENCONTENT_TARGET`  | `darwin-arm64`, `darwin-x64`, `windows-arm64`, `windows-x64`, `linux-x64`, `linux-arm64`. Defaults to the host. |
 
 The CLI is placed outside `app.asar` in the application's resources directory, and packaging fails if it is missing.
 `bun run build` uses `packages/cli/dist` when that holds the target's CLI. Otherwise `dev` (and `local`, unset or unrecognized)
@@ -36,7 +36,7 @@ default. `bun dev --download-server <version>` instead downloads that CLI versio
 
 ## Beta channel
 
-Every push to the `beta` branch publishes OpenCode Beta (`ai.opencode.desktop.beta`) as version `0.0.0-beta-<run>` to
+Every push to the `beta` branch publishes OpenCode Beta (`ai.opencontent.desktop.beta`) as version `0.0.0-beta-<run>` to
 the `beta` update channel. Beta publishes only the desktop app; the CLI and SDK packages ship
 from `dev`. Install it from `https://opencode.ai/update/api/beta/desktop/opencode/<asset>`, for example
 `opencode-desktop-mac-arm64.dmg` or `opencode-desktop-win-x64.exe`. Installed builds update in place on every platform.
@@ -45,7 +45,7 @@ from `dev`. Install it from `https://opencode.ai/update/api/beta/desktop/opencod
 
 `perf/startup.bench.ts` times a launch with [strobe](https://github.com/anomalyco/strobe), from process spawn to what a
 person waits for, in pairs of launches of two builds with an interval per case. Every launch runs in a private home
-(its own `%APPDATA%`, XDG folders, database, config and service registration, the developer's `OPENCODE_*`, `OTEL_*`
+(its own `%APPDATA%`, XDG folders, database, config and service registration, the developer's `OPENCONTENT_*`, `OTEL_*`
 and `SENTRY_*` environment removed), so it never touches the developer's app, profile or live service.
 
 | Case                            | Launch                                                                              | Ends on      |
@@ -57,7 +57,7 @@ and `SENTRY_*` environment removed), so it never touches the developer's app, pr
 | dev start to Home               | `bun dev:desktop` with Vite's caches and `out` deleted.                             | Home         |
 
 ```bash
-# A returning user's launches of two packaged builds (pack each with OPENCODE_CHANNEL=beta or prod), or two installed
+# A returning user's launches of two packaged builds (pack each with OPENCONTENT_CHANNEL=beta or prod), or two installed
 # channels.
 strobe bench perf/startup.bench.ts --target desktop --base exe:<old>/OpenCode.exe --head exe:<new>/OpenCode.exe
 strobe bench perf/startup.bench.ts --target desktop --base app:opencode --head app:opencode-beta
@@ -82,6 +82,6 @@ returning-user cases keep the GPU shader caches their build compiled in earlier 
 them; `first launch` starts each launch without them. `--why always` adds a profiled
 launch per build: the main process and the renderer, both from their first statement.
 
-A packaged beta or prod build registers itself as the `opencode://` handler when it starts, even from the bench; the
+A packaged beta or prod build registers itself as the `opencontent://` handler when it starts, even from the bench; the
 installed app takes the registration back on its next launch. Those channels run with `HTTPS_PROXY` pointed at a
 closed port (`--offline` forces it for dev) so the updater's first check fails fast instead of reaching GitHub.

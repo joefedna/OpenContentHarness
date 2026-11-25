@@ -286,7 +286,7 @@ export const dict = {
   "error.chain.responseBody": "Тяло на отговора:\n{{body}}",
   "error.chain.didYouMean": "Може би имахте предвид: {{suggestions}}",
   "error.chain.modelNotFound": "Моделът не е намерен: {{provider}}/{{model}}",
-  "error.chain.checkConfig": "Проверете имената на доставчика/модела на вашата конфигурация (opencode.json).",
+  "error.chain.checkConfig": "Проверете имената на доставчика/модела на вашата конфигурация (opencontent.json).",
   "error.chain.mcpFailed":
     'MCP сървър "{{name}}" не успя. Имайте предвид, че OpenCode все още не поддържа MCP удостоверяване.',
   "error.chain.providerAuthFailed": "Неуспешно удостоверяване на доставчика ({{provider}}): {{message}}",
@@ -565,7 +565,7 @@ export const dict = {
   "settings.extensions.tab.mcps": "MCPs",
   "settings.extensions.tab.skills": "Умения",
   "settings.extensions.availableAll": "Предлага се за всички проекти",
-  "settings.extensions.manageConfig": "Управление в opencode.json",
+  "settings.extensions.manageConfig": "Управление в opencontent.json",
   "settings.extensions.addSkills": "Как да добавите умения",
   "project.settings.extensions.description": "Вижте разширенията, налични за този проект",
   "project.settings.extensions.tab.lsps": "LSPs",
@@ -774,8 +774,8 @@ export const dict = {
   "project.settings.color.description":
     "Използва се за иконата на проекта, когато няма зададено персонализирано изображение",
   "project.settings.worktree.startup.description": "Изпълнява се веднъж след създаването на ново работно дърво",
-  "project.settings.worktree.startup.hint.base": "Използвайте $OPENCODE_WORKTREE_BASE за основното работно дърво.",
-  "project.settings.worktree.startup.hint.new": "Използвайте $OPENCODE_WORKTREE_PATH за новото работно дърво.",
+  "project.settings.worktree.startup.hint.base": "Използвайте $OPENCONTENT_WORKTREE_BASE за основното работно дърво.",
+  "project.settings.worktree.startup.hint.new": "Използвайте $OPENCONTENT_WORKTREE_PATH за новото работно дърво.",
   "project.settings.extensions.empty.mcps.title": "Все още няма MCP сървъри",
   "project.settings.extensions.empty.mcps.description": "Наличните за OpenCode MCP сървъри ще се показват тук",
   "project.settings.extensions.empty.plugins.title": "Все още няма добавки",
@@ -1297,7 +1297,7 @@ export const dict = {
   "settings.plugins.part.server": "Сървър",
   "settings.plugins.part.tui": "TUI",
   "settings.plugins.parts.note":
-    'Превключвателите изключват само десктоп интерфейса на плъгина. Добавете "-<id>" в plugins в глобалния opencode.json, за да изключите сървърната му част, или "-" и ID на TUI плъгина му в plugins в cli.json, за да изключите TUI частта му.',
+    'Превключвателите изключват само десктоп интерфейса на плъгина. Добавете "-<id>" в plugins в глобалния opencontent.json, за да изключите сървърната му част, или "-" и ID на TUI плъгина му в plugins в cli.json, за да изключите TUI частта му.',
   "settings.about.copyVersionFailed": "Версията не можа да бъде копирана",
   "settings.about.notices.title": "Известия за трети страни",
   "settings.about.notices.description": "OpenCode включва следния софтуер с отворен код.",

@@ -62,7 +62,7 @@ const serviceLayer = Layer.effect(
     yield* Effect.logInfo("app starting", {
       version: VERSION,
       packaged: app.isPackaged,
-      onboardingTest: process.env.OPENCODE_TEST_ONBOARDING === "1",
+      onboardingTest: process.env.OPENCONTENT_TEST_ONBOARDING === "1",
       marks,
     })
     const fibers = yield* FiberSet.make()
@@ -350,7 +350,7 @@ function manifest(path: Path.Path, netLogPath: string | undefined) {
 function serverLogRoots(path: Path.Path) {
   const xdgData = process.env.XDG_DATA_HOME || path.join(homedir(), ".local", "share")
 
-  return [...new Set([path.join(xdgData, "opencode", "log"), path.join(app.getPath("userData"), "opencode", "log")])]
+  return [...new Set([path.join(xdgData, "opencontent", "log"), path.join(app.getPath("userData"), "opencontent", "log")])]
 }
 
 type Entry = { name: string; path: string; offset: number } | { name: string; data: Uint8Array }

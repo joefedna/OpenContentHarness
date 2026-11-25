@@ -20,7 +20,7 @@ export interface Interface {
 }
 
 export const real: Interface = {
-  which: () => process.env.OPENCODE_CLAUDE_PATH || which("claude") || undefined,
+  which: () => process.env.OPENCONTENT_CLAUDE_PATH || which("claude") || undefined,
   env: () => process.env,
   sessionExists: async (sessionID, configDir) => {
     if (configDir) {

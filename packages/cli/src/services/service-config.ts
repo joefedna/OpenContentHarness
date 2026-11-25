@@ -1,5 +1,5 @@
 import { Global } from "@opencode/util/global"
-import { OPENCODE_CHANNEL, OPENCODE_VERSION } from "../version"
+import { OPENCONTENT_CHANNEL, OPENCONTENT_VERSION } from "../version"
 import { Hash } from "@opencode/util/hash"
 import { Service } from "@opencode/client/effect/service"
 import { Effect, FileSystem, Option, Schedule, Schema } from "effect"
@@ -38,36 +38,36 @@ const decodeLegacy = Schema.decodeUnknownOption(
 )
 const decodeRegistration = Schema.decodeUnknownEffect(Schema.fromJsonString(Service.Info))
 
-export function filename(channel = OPENCODE_CHANNEL) {
+export function filename(channel = OPENCONTENT_CHANNEL) {
   if (channel === "latest" || channel === "dev" || channel === "beta" || channel === "next") return "service.json"
   return `service-${channel.replace(/[^a-zA-Z0-9._-]/g, "-")}.json`
 }
 
-export function defaultPort(channel = OPENCODE_CHANNEL, platform = process.platform) {
+export function defaultPort(channel = OPENCONTENT_CHANNEL, platform = process.platform) {
   const port = channelPort(channel)
   // Windows hands out 0xC000-0xFFFF for outgoing connections, Hyper-V and WinNAT reserve blocks of that range at boot,
   // and WSL mirrored networking reserves a 4096-port block that usually covers 44620-48715. A reserved port fails as in
   // use while nothing listens on it. Moving into the 0x7000 block, below 32768, avoids all of them and keeps the low
-  // 12 bits: 0xC0DE becomes 0x70DE.
+  // 12 bits: 0xC0C7 becomes 0x70C7.
   if (platform === "win32" && port >= 0x8000) return 0x7000 | (port & 0xfff)
   return port
 }
 
 function channelPort(channel: string) {
-  if (channel === "latest" || channel === "dev" || channel === "beta" || channel === "next") return 0xc0de
-  if (channel === "local") return 0xc0df
+  if (channel === "latest" || channel === "dev" || channel === "beta" || channel === "next") return 0xc0c7
+  if (channel === "local") return 0xc0c8
   return 10_000 + (Number.parseInt(Hash.fast(channel).slice(0, 8), 16) % 50_000)
 }
 
-export function legacyFilename(channel = OPENCODE_CHANNEL) {
+export function legacyFilename(channel = OPENCONTENT_CHANNEL) {
   if (channel === "latest" || channel === "local") return
   return `service-${Hash.fast(channel)}.json`
 }
 
 export function versionBelongsToChannel(
   version: string | undefined,
-  channel = OPENCODE_CHANNEL,
-  installedVersion = OPENCODE_VERSION,
+  channel = OPENCONTENT_CHANNEL,
+  installedVersion = OPENCONTENT_VERSION,
 ) {
   if (version === undefined) return false
   if (version === installedVersion) return true
@@ -79,8 +79,8 @@ export function versionBelongsToChannel(
 export const migrateRegistration = Effect.fnUntraced(function* (
   legacy: string,
   file: string,
-  channel = OPENCODE_CHANNEL,
-  installedVersion = OPENCODE_VERSION,
+  channel = OPENCONTENT_CHANNEL,
+  installedVersion = OPENCONTENT_VERSION,
 ) {
   const fs = yield* FileSystem.FileSystem
   const text = yield* fs.readFileString(legacy).pipe(Effect.option)
@@ -125,7 +125,7 @@ const paths = Effect.gen(function* () {
     legacyConfigFile: legacy ? path.join(global.config, legacy) : undefined,
     legacyRegistrationFiles: [
       ...(legacy ? [path.join(global.state, legacy)] : []),
-      ...(name !== "service.json" && OPENCODE_CHANNEL !== "local" ? [path.join(global.state, "service.json")] : []),
+      ...(name !== "service.json" && OPENCONTENT_CHANNEL !== "local" ? [path.join(global.state, "service.json")] : []),
     ],
     configFile: path.join(global.config, name),
   }
@@ -145,7 +145,7 @@ export const options = Effect.fnUntraced(function* (input: { readonly checkVersi
   yield* Effect.forEach(legacyRegistrationFiles, (legacy) => migrateRegistration(legacy, file))
   return {
     file,
-    version: input.checkVersion ? OPENCODE_VERSION : undefined,
+    version: input.checkVersion ? OPENCONTENT_VERSION : undefined,
     env: processEnv((yield* read()).env),
     command: [...selfCommand(), "serve", "--service"],
   }

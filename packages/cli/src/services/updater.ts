@@ -1,7 +1,7 @@
 import { Global } from "@opencode/util/global"
 import { AppProcess } from "@opencode/util/process"
 import { EffectFlock } from "@opencode/util/effect-flock"
-import { OPENCODE_ARTIFACT, OPENCODE_CHANNEL, OPENCODE_LOCAL, OPENCODE_VERSION } from "../version"
+import { OPENCONTENT_ARTIFACT, OPENCONTENT_CHANNEL, OPENCONTENT_LOCAL, OPENCONTENT_VERSION } from "../version"
 import { Context, Duration, Effect, FileSystem, Layer, Option, Ref, Schema } from "effect"
 import { ChildProcess } from "effect/process"
 import { parse, type ParseError } from "jsonc-parser"
@@ -124,6 +124,12 @@ export interface Interface {
 
 export class Service extends Context.Service<Service, Interface>()("@opencode/cli/Updater") {}
 
+/**
+ * OpenContentHarness has no release channel yet. The updater's install sources (npm, Homebrew, the install script)
+ * all point at OpenCode, so update checks and `upgrade` stay off until our own releases exist.
+ */
+export const releases = false as boolean
+
 export function decodePolicy(text: string): Policy | undefined {
   // The CLI only projects this host-level preference instead of initializing
   // the location-scoped server configuration graph.
@@ -146,8 +152,8 @@ const make = Effect.gen(function* () {
   const global = yield* Global.Service
   const appProcess = yield* AppProcess.Service
   const flock = yield* EffectFlock.Service
-  const installedVersion = yield* Ref.make(OPENCODE_VERSION)
-  const channel = OPENCODE_CHANNEL.replace(/[^a-zA-Z0-9._-]/g, "-")
+  const installedVersion = yield* Ref.make(OPENCONTENT_VERSION)
+  const channel = OPENCONTENT_CHANNEL.replace(/[^a-zA-Z0-9._-]/g, "-")
   const executable = yield* fs.realPath(process.execPath).pipe(Effect.orElseSucceed(() => process.execPath))
   const installedPackage = yield* Effect.gen(function* () {
     const directory = path.dirname(path.dirname(executable))
@@ -196,7 +202,7 @@ const make = Effect.gen(function* () {
   const npm = prefixNpm ?? "npm"
 
   const readPolicy = Effect.fnUntraced(function* () {
-    const values = yield* Effect.forEach(["config.json", "opencode.json", "opencode.jsonc"], (name) =>
+    const values = yield* Effect.forEach(["config.json", "opencontent.json", "opencontent.jsonc"], (name) =>
       fs.readFileString(path.join(global.config, name)).pipe(
         Effect.map(decodePolicy),
         Effect.orElseSucceed(() => undefined),
@@ -229,7 +235,7 @@ const make = Effect.gen(function* () {
 
   const curlPath = path.resolve(
     global.home,
-    ".opencode",
+    ".opencontent",
     "bin",
     process.platform === "win32" ? "opencode.exe" : "opencode",
   )
@@ -238,7 +244,7 @@ const make = Effect.gen(function* () {
   // On Windows a bare `bash` may be the WSL launcher, which cannot run the installer against Windows paths.
   const installerBash = Effect.fnUntraced(function* () {
     if (process.platform !== "win32") return "bash"
-    if (process.env.OPENCODE_GIT_BASH_PATH) return process.env.OPENCODE_GIT_BASH_PATH
+    if (process.env.OPENCONTENT_GIT_BASH_PATH) return process.env.OPENCONTENT_GIT_BASH_PATH
     const git = yield* exec(["git", "--exec-path"]).pipe(Effect.orElseSucceed(() => undefined))
     const bash = git?.code === 0 ? path.resolve(git.stdout.trim(), "..", "..", "..", "bin", "bash.exe") : undefined
     if (bash && (yield* fs.exists(bash).pipe(Effect.orElseSucceed(() => false)))) return bash
@@ -246,7 +252,7 @@ const make = Effect.gen(function* () {
       new UpgradeError({
         title: "Git Bash is required to update OpenCode",
         detail: "The OpenCode installer runs with Git Bash on Windows, and it was not found.",
-        retry: "Install Git for Windows or set OPENCODE_GIT_BASH_PATH, then run opencode upgrade again.",
+        retry: "Install Git for Windows or set OPENCONTENT_GIT_BASH_PATH, then run opencode upgrade again.",
       }),
     )
   })
@@ -321,7 +327,7 @@ const make = Effect.gen(function* () {
         fetch(
           core
             ? "https://formulae.brew.sh/api/formula/opencode.json"
-            : `https://opencode.ai/update/api/${encodeURIComponent(channel)}/${encodeURIComponent(OPENCODE_ARTIFACT)}/${distribution}?current=${encodeURIComponent(OPENCODE_VERSION)}`,
+            : `https://opencode.ai/update/api/${encodeURIComponent(channel)}/${encodeURIComponent(OPENCONTENT_ARTIFACT)}/${distribution}?current=${encodeURIComponent(OPENCONTENT_VERSION)}`,
           {
             signal: AbortSignal.any([signal, AbortSignal.timeout(10_000)]),
           },
@@ -501,7 +507,7 @@ const make = Effect.gen(function* () {
         "--global",
         ...npmPrefixArgs,
         `--allow-scripts=${packageName}`,
-        ...((OPENCODE_ARTIFACT === "cli" && !installedPackage?.endsWith("/cli-node")) ||
+        ...((OPENCONTENT_ARTIFACT === "cli" && !installedPackage?.endsWith("/cli-node")) ||
         (installedPackage && packageName !== installedPackage)
           ? ["--force"]
           : []),
@@ -605,11 +611,15 @@ const make = Effect.gen(function* () {
   })
 
   const inspect = Effect.fnUntraced(function* () {
-    if (OPENCODE_LOCAL || ["1", "true"].includes(process.env.OPENCODE_DISABLE_AUTOUPDATE?.toLowerCase() ?? "")) {
+    if (
+      !releases ||
+      OPENCONTENT_LOCAL ||
+      ["1", "true"].includes(process.env.OPENCONTENT_DISABLE_AUTOUPDATE?.toLowerCase() ?? "")
+    ) {
       yield* Effect.logInfo("update check skipped", {
-        reason: OPENCODE_LOCAL ? "local-install" : "disabled",
-        version: OPENCODE_VERSION,
-        channel: OPENCODE_CHANNEL,
+        reason: !releases ? "no-release-channel" : OPENCONTENT_LOCAL ? "local-install" : "disabled",
+        version: OPENCONTENT_VERSION,
+        channel: OPENCONTENT_CHANNEL,
       })
       return undefined
     }
@@ -660,7 +670,7 @@ const make = Effect.gen(function* () {
   })
 
   const check = Effect.fn("cli.updater.check")(function* () {
-    if (OPENCODE_LOCAL)
+    if (OPENCONTENT_LOCAL)
       return {
         type: "unavailable" as const,
         message: "This build runs from a source checkout. Use an installed OpenCode release to check for updates.",
@@ -668,7 +678,7 @@ const make = Effect.gen(function* () {
     const detected = yield* method()
     if (!detected && installedOwner) {
       const data = yield* release("npm")
-      if (action(OPENCODE_VERSION, data.version, "auto") === "none") return undefined
+      if (action(OPENCONTENT_VERSION, data.version, "auto") === "none") return undefined
       return {
         type: "unavailable" as const,
         message: managedMessage(managedError(installedOwner, `${data.package}@${data.version}`)),
@@ -685,7 +695,7 @@ const make = Effect.gen(function* () {
     const current = yield* Ref.get(installedVersion)
     if (action(current, version, "auto") === "none") {
       // An earlier check may have installed the update while this client is still running.
-      return action(OPENCODE_VERSION, current, "auto") === "none"
+      return action(OPENCONTENT_VERSION, current, "auto") === "none"
         ? undefined
         : { type: "installed" as const, version: current }
     }

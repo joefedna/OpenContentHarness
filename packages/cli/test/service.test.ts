@@ -2,7 +2,7 @@ import { NodeFileSystem } from "@effect/platform-node"
 import { validateRoutes } from "@opentunnel/client/effect"
 import { Service, type Info } from "@opencode/client/effect/service"
 import { Global } from "@opencode/util/global"
-import { OPENCODE_VERSION } from "../src/version"
+import { OPENCONTENT_VERSION } from "../src/version"
 import { expect, test } from "bun:test"
 import { Deferred, Effect, FileSystem, Schedule, Schema } from "effect"
 import { NetAddress } from "effect/net"
@@ -22,20 +22,20 @@ import { testEffect } from "../../core/test/lib/effect"
 const it = testEffect(NodeFileSystem.layer)
 
 test("managed service ports are stable per installation channel", () => {
-  expect(ServiceConfig.defaultPort("latest", "linux")).toBe(0xc0de)
-  expect(ServiceConfig.defaultPort("dev", "linux")).toBe(0xc0de)
-  expect(ServiceConfig.defaultPort("beta", "linux")).toBe(0xc0de)
-  expect(ServiceConfig.defaultPort("next", "linux")).toBe(0xc0de)
-  expect(ServiceConfig.defaultPort("local", "linux")).toBe(0xc0df)
-  expect(ServiceConfig.defaultPort("latest", "darwin")).toBe(0xc0de)
+  expect(ServiceConfig.defaultPort("latest", "linux")).toBe(0xc0c7)
+  expect(ServiceConfig.defaultPort("dev", "linux")).toBe(0xc0c7)
+  expect(ServiceConfig.defaultPort("beta", "linux")).toBe(0xc0c7)
+  expect(ServiceConfig.defaultPort("next", "linux")).toBe(0xc0c7)
+  expect(ServiceConfig.defaultPort("local", "linux")).toBe(0xc0c8)
+  expect(ServiceConfig.defaultPort("latest", "darwin")).toBe(0xc0c7)
   expect(ServiceConfig.defaultPort("preview-a", "linux")).toBe(ServiceConfig.defaultPort("preview-a", "linux"))
   expect(ServiceConfig.defaultPort("preview-a", "linux")).not.toBe(ServiceConfig.defaultPort("preview-b", "linux"))
 })
 
 test("managed service ports on Windows stay below the ranges Windows and WSL reserve", () => {
-  expect(ServiceConfig.defaultPort("latest", "win32")).toBe(0x70de)
-  expect(ServiceConfig.defaultPort("dev", "win32")).toBe(0x70de)
-  expect(ServiceConfig.defaultPort("local", "win32")).toBe(0x70df)
+  expect(ServiceConfig.defaultPort("latest", "win32")).toBe(0x70c7)
+  expect(ServiceConfig.defaultPort("dev", "win32")).toBe(0x70c7)
+  expect(ServiceConfig.defaultPort("local", "win32")).toBe(0x70c8)
   const ports = Array.from({ length: 200 }, (_, index) => ({
     windows: ServiceConfig.defaultPort(`preview-${index}`, "win32"),
     linux: ServiceConfig.defaultPort(`preview-${index}`, "linux"),
@@ -85,7 +85,7 @@ test.each([
     stderr: "ignore",
   })
   await child.exited
-  const directory = path.join(root.path, "data", "opencode", "log")
+  const directory = path.join(root.path, "data", "opencontent", "log")
   const log = (
     await Promise.all((await fs.readdir(directory)).map((file) => Bun.file(path.join(directory, file)).text()))
   ).join("")
@@ -193,14 +193,14 @@ test("service config manages environment variables", async () => {
   const layer = Global.layerWith({ config: path.join(root, "config"), state: path.join(root, "state") })
   try {
     await Effect.runPromise(
-      ServiceConfig.set("env", "OPENCODE_SERVICE_ENV_TEST", "configured").pipe(
+      ServiceConfig.set("env", "OPENCONTENT_SERVICE_ENV_TEST", "configured").pipe(
         Effect.provide(layer),
         Effect.provide(NodeFileSystem.layer),
       ),
     )
     expect(
       await Effect.runPromise(
-        ServiceConfig.get("env", "OPENCODE_SERVICE_ENV_TEST").pipe(
+        ServiceConfig.get("env", "OPENCONTENT_SERVICE_ENV_TEST").pipe(
           Effect.provide(layer),
           Effect.provide(NodeFileSystem.layer),
         ),
@@ -212,10 +212,10 @@ test("service config manages environment variables", async () => {
           ServiceConfig.options().pipe(Effect.provide(layer), Effect.provide(NodeFileSystem.layer)),
         )
       ).env,
-    ).toEqual({ OPENCODE_SERVICE_ENV_TEST: "configured" })
+    ).toEqual({ OPENCONTENT_SERVICE_ENV_TEST: "configured" })
 
     await Effect.runPromise(
-      ServiceConfig.unset("env", "OPENCODE_SERVICE_ENV_TEST").pipe(
+      ServiceConfig.unset("env", "OPENCONTENT_SERVICE_ENV_TEST").pipe(
         Effect.provide(layer),
         Effect.provide(NodeFileSystem.layer),
       ),
@@ -426,10 +426,10 @@ test("concurrent service processes elect one server", async () => {
   const root = await fs.mkdtemp(path.join(os.tmpdir(), "opencode-service-election-"))
   const env = serviceEnv(root)
   const command = [process.execPath, path.join(import.meta.dir, "../src/index.ts"), "serve", "--service"]
-  const registration = path.join(root, "state", "opencode", "service-local.json")
+  const registration = path.join(root, "state", "opencontent", "service-local.json")
   const port = await availablePort()
-  const config = path.join(root, "config", "opencode", "service-local.json")
-  await fs.mkdir(path.join(root, "config", "opencode"), { recursive: true })
+  const config = path.join(root, "config", "opencontent", "service-local.json")
+  await fs.mkdir(path.join(root, "config", "opencontent"), { recursive: true })
   await fs.writeFile(config, JSON.stringify({ port }))
   const processes = Array.from({ length: 10 }, () => Bun.spawn(command, { env, stderr: "pipe", stdout: "pipe" }))
 
@@ -465,7 +465,7 @@ test("concurrent service processes elect one server", async () => {
       hostname: os.hostname(),
       urls: [info.url],
       // The server reports the canonical tmp directory; Windows os.tmpdir() can be an 8.3 short name.
-      paths: { tmp: await fs.realpath(path.join(os.tmpdir(), "opencode")) },
+      paths: { tmp: await fs.realpath(path.join(os.tmpdir(), "opencontent")) },
       capabilities: { persistentPty: true },
     })
     const contender = Bun.spawn(command, { env, stderr: "pipe", stdout: "ignore" })
@@ -495,9 +495,9 @@ test("configured managed service port overrides the channel default", async () =
   const root = await fs.mkdtemp(path.join(os.tmpdir(), "opencode-service-port-"))
   const port = await availablePort()
   const env = serviceEnv(root)
-  const registration = path.join(root, "state", "opencode", "service-local.json")
-  const config = path.join(root, "config", "opencode", "service-local.json")
-  await fs.mkdir(path.join(root, "config", "opencode"), { recursive: true })
+  const registration = path.join(root, "state", "opencontent", "service-local.json")
+  const config = path.join(root, "config", "opencontent", "service-local.json")
+  await fs.mkdir(path.join(root, "config", "opencontent"), { recursive: true })
   await fs.writeFile(config, JSON.stringify({ port, password: "" }))
   const owner = Bun.spawn([process.execPath, path.join(import.meta.dir, "../src/index.ts"), "serve", "--service"], {
     env,
@@ -529,7 +529,7 @@ test.each([
   async ({ args, origins }) => {
     const root = await fs.mkdtemp(path.join(os.tmpdir(), "opencode-service-cors-"))
     const config = path.join(root, "config", ServiceConfig.filename())
-    const registration = path.join(root, "state", "opencode", ServiceConfig.filename())
+    const registration = path.join(root, "state", "opencontent", ServiceConfig.filename())
     const cors = ["http://192.0.2.10:3001", "https://configured.example.com"]
     await fs.mkdir(path.dirname(config), { recursive: true })
     await fs.writeFile(config, JSON.stringify({ cors }))
@@ -575,7 +575,7 @@ test("the original managed service contender binds when the occupied port is rel
   })
   const port = listener.port
   if (port === undefined) throw new Error("Server did not bind a port")
-  const registration = path.join(root, "state", "opencode", "service-local.json")
+  const registration = path.join(root, "state", "opencontent", "service-local.json")
   await fs.mkdir(path.join(root, "config"), { recursive: true })
   await fs.mkdir(path.dirname(registration), { recursive: true })
   await fs.writeFile(path.join(root, "config", "service-local.json"), JSON.stringify({ port }))
@@ -583,7 +583,7 @@ test("the original managed service contender binds when the occupied port is rel
     registration,
     JSON.stringify({
       id: "stale",
-      version: OPENCODE_VERSION,
+      version: OPENCONTENT_VERSION,
       url: "http://127.0.0.1:1",
       pid: 2_147_483_647,
       password: "stale",
@@ -618,7 +618,7 @@ test("the original managed service contender binds when the occupied port is rel
       await fetch(new URL("/api/info", endpoint.url), { headers: Service.headers(endpoint) }).then((response) =>
         response.json(),
       ),
-    ).toMatchObject({ pid: contender.pid, version: OPENCODE_VERSION, urls: [endpoint.url] })
+    ).toMatchObject({ pid: contender.pid, version: OPENCONTENT_VERSION, urls: [endpoint.url] })
     expect(contender.exitCode).toBe(null)
     await Effect.runPromise(Service.stop({ file: registration }).pipe(Effect.provide(NodeFileSystem.layer)))
     expect(await waitForExit(contender)).toBe(true)
@@ -644,16 +644,16 @@ test("unresponsive managed port occupancy reports a bounded conflict", async () 
       return new Promise<Response>(() => {})
     },
   })
-  const registration = path.join(root, "state", "opencode", "service-local.json")
-  await fs.mkdir(path.join(root, "config", "opencode"), { recursive: true })
+  const registration = path.join(root, "state", "opencontent", "service-local.json")
+  await fs.mkdir(path.join(root, "config", "opencontent"), { recursive: true })
   await fs.mkdir(path.dirname(registration), { recursive: true })
   await fs.writeFile(
-    path.join(root, "config", "opencode", "service-local.json"),
+    path.join(root, "config", "opencontent", "service-local.json"),
     JSON.stringify({ port: listener.port, env: { XDG_STATE_HOME: path.join(root, "elsewhere") } }),
   )
   const stale = {
     id: "stale",
-    version: OPENCODE_VERSION,
+    version: OPENCONTENT_VERSION,
     url: "http://127.0.0.1:1",
     pid: process.pid,
     password: "stale",
@@ -704,13 +704,13 @@ test("port contender recognizes an incumbent registered during the bind race", a
       requests.count += 1
       if (requests.count === 2) recognizing.resolve()
       return Response.json(
-        { version: OPENCODE_VERSION, pid: process.pid, urls: [], paths: { tmp: "/tmp/opencode" } },
+        { version: OPENCONTENT_VERSION, pid: process.pid, urls: [], paths: { tmp: "/tmp/opencode" } },
         { status: 503 },
       )
     },
   })
-  const registration = path.join(root, "state", "opencode", "service-local.json")
-  const config = path.join(root, "config", "opencode", "service-local.json")
+  const registration = path.join(root, "state", "opencontent", "service-local.json")
+  const config = path.join(root, "config", "opencontent", "service-local.json")
   await fs.mkdir(path.dirname(config), { recursive: true })
   await fs.writeFile(config, JSON.stringify({ port: listener.port }))
   await fs.mkdir(path.dirname(registration), { recursive: true })
@@ -718,7 +718,7 @@ test("port contender recognizes an incumbent registered during the bind race", a
     registration,
     JSON.stringify({
       id: "stale",
-      version: OPENCODE_VERSION,
+      version: OPENCONTENT_VERSION,
       url: "http://127.0.0.1:1",
       pid: 2_147_483_647,
       password: "stale",
@@ -735,7 +735,7 @@ test("port contender recognizes an incumbent registered during the bind race", a
     await Bun.sleep(8_000)
     const info = {
       id: "incumbent",
-      version: OPENCODE_VERSION,
+      version: OPENCONTENT_VERSION,
       url: `http://127.0.0.1:${listener.port}`,
       pid: process.pid,
       password: "incumbent",
@@ -753,7 +753,7 @@ test("port contender recognizes an incumbent registered during the bind race", a
 
 test("service registration replaces a stale owner with the bound address", async () => {
   const root = await fs.mkdtemp(path.join(os.tmpdir(), "opencode-service-stale-"))
-  const registration = path.join(root, "state", "opencode", "service-local.json")
+  const registration = path.join(root, "state", "opencontent", "service-local.json")
   await fs.mkdir(path.dirname(registration), { recursive: true })
   await fs.writeFile(
     registration,
@@ -771,7 +771,7 @@ test("service registration replaces a stale owner with the bound address", async
     )
     expect(await Bun.file(registration).json()).toEqual({
       id: "owner",
-      version: OPENCODE_VERSION,
+      version: OPENCONTENT_VERSION,
       url: "http://127.0.0.1:4321",
       pid: process.pid,
       password: "secret",
@@ -788,11 +788,11 @@ test("a failed service stays registered and owns the selected port until stopped
   const port = await availablePort()
   const database = path.join(root, "database")
   await fs.mkdir(database)
-  await fs.mkdir(path.join(root, "config", "opencode"), { recursive: true })
-  await fs.writeFile(path.join(root, "config", "opencode", "service-local.json"), JSON.stringify({ port }))
-  const env = { ...serviceEnv(root), OPENCODE_DB: database }
+  await fs.mkdir(path.join(root, "config", "opencontent"), { recursive: true })
+  await fs.writeFile(path.join(root, "config", "opencontent", "service-local.json"), JSON.stringify({ port }))
+  const env = { ...serviceEnv(root), OPENCONTENT_DB: database }
   const command = [process.execPath, path.join(import.meta.dir, "../src/index.ts"), "serve", "--service"]
-  const registration = path.join(root, "state", "opencode", "service-local.json")
+  const registration = path.join(root, "state", "opencontent", "service-local.json")
   const owner = Bun.spawn(command, { env, stderr: "pipe", stdout: "ignore" })
 
   try {
@@ -882,9 +882,9 @@ function serviceEnv(root: string) {
     ...process.env,
     BUN_RUNTIME_TRANSPILER_CACHE_PATH: transpilerCache,
     HOME: root,
-    OPENCODE_CONFIG_DIR: undefined,
-    OPENCODE_DB: path.join(root, "opencode.db"),
-    OPENCODE_TEST_HOME: root,
+    OPENCONTENT_CONFIG_DIR: undefined,
+    OPENCONTENT_DB: path.join(root, "opencode.db"),
+    OPENCONTENT_TEST_HOME: root,
     XDG_CACHE_HOME: path.join(root, "cache"),
     XDG_CONFIG_HOME: path.join(root, "config"),
     XDG_DATA_HOME: path.join(root, "data"),
@@ -895,12 +895,12 @@ function serviceEnv(root: string) {
 async function startManagedService(prefix: string, failBoot = false) {
   const root = await fs.mkdtemp(path.join(os.tmpdir(), prefix))
   const port = await availablePort()
-  const registration = path.join(root, "state", "opencode", "service-local.json")
-  await fs.mkdir(path.join(root, "config", "opencode"), { recursive: true })
+  const registration = path.join(root, "state", "opencontent", "service-local.json")
+  await fs.mkdir(path.join(root, "config", "opencontent"), { recursive: true })
   if (failBoot) await fs.mkdir(path.join(root, "database"))
-  await fs.writeFile(path.join(root, "config", "opencode", "service-local.json"), JSON.stringify({ port }))
+  await fs.writeFile(path.join(root, "config", "opencontent", "service-local.json"), JSON.stringify({ port }))
   const owner = Bun.spawn([process.execPath, path.join(import.meta.dir, "../src/index.ts"), "serve", "--service"], {
-    env: failBoot ? { ...serviceEnv(root), OPENCODE_DB: path.join(root, "database") } : serviceEnv(root),
+    env: failBoot ? { ...serviceEnv(root), OPENCONTENT_DB: path.join(root, "database") } : serviceEnv(root),
     stderr: "pipe",
     stdout: "ignore",
   })
